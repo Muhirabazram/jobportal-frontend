@@ -139,7 +139,7 @@ export default function LowonganDisimpan() {
   }
 
   // Hitung jumlah untuk tab
-  const totalApps = applications.length
+  const totalApps = applications.length + savedJobs.length
   const pendingCount = applications.filter(a => a.status === 'pending').length
   const reviewedCount = applications.filter(a => a.status === 'reviewed').length
   const acceptedCount = applications.filter(a => a.status === 'accepted').length

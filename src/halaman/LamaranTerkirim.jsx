@@ -77,7 +77,7 @@ export default function LamaranTerkirim() {
   // Hanya lamaran dengan status "pending" yang dianggap "terkirim"
   const pendingApps = applications.filter(app => app.status === 'pending')
 
-  const totalApps = applications.length
+  const totalApps = applications.length + savedJobs.length
   const pendingCount = pendingApps.length
   const reviewedCount = applications.filter(a => a.status === 'reviewed').length
   const acceptedCount = applications.filter(a => a.status === 'accepted').length

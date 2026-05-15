@@ -77,7 +77,7 @@ export default function LamaranDitolak() {
   const pendingApps = applications.filter(app => app.status === 'pending')
   const rejectedApps = applications.filter(app => app.status === 'rejected')
 
-  const totalApps = applications.length
+  const totalApps = applications.length + savedJobs.length
   const pendingCount = pendingApps.length
   const reviewedCount = applications.filter(a => a.status === 'reviewed').length
   const acceptedCount = applications.filter(a => a.status === 'accepted').length

@@ -27,9 +27,13 @@ const IkonSettings = () => (
 )
 
 /* ── KOMPONEN DETAIL LOWONGAN ── */
-function DetailLowongan({ job, onKembali, showModal }) {
+function DetailLowongan({ job, onKembali, showModal, onUpdateJob }) {
   const navigate = useNavigate()
   const [disimpan, setDisimpan] = useState(job.is_saved || false)
+
+  useEffect(() => {
+    setDisimpan(job.is_saved || false)
+  }, [job])
   const [lamarLoading, setLamarLoading] = useState(false)
   const [showLoginModal, setShowLoginModal] = useState(false)
   const [showPreviewModal, setShowPreviewModal] = useState(false)
@@ -137,6 +141,7 @@ function DetailLowongan({ job, onKembali, showModal }) {
       
       if (!res.ok) throw new Error('Gagal menyimpan lowongan')
       setDisimpan(!disimpan)
+      if (onUpdateJob) onUpdateJob({ ...job, is_saved: !disimpan })
     } catch (err) {
       showModal('Kesalahan', err.message, 'alert')
     }
@@ -426,9 +431,24 @@ export default function DashboardPencari() {
     tipeFilter.forEach(s => params.append('job_types[]', s))
 
     try {
-      const res = await fetch(`http://localhost:8000/api/jobs?${params.toString()}`)
+      const headers = {}
+      if (token) headers['Authorization'] = `Bearer ${token}`
+
+      const res = await fetch(`http://localhost:8000/api/jobs?${params.toString()}`, { headers })
       const data = await res.json()
-      setJobs(data.data)
+      
+      let finalJobs = data.data
+      if (token) {
+        try {
+          const savedRes = await fetch('http://localhost:8000/api/saved-jobs', { headers })
+          if (savedRes.ok) {
+            const savedData = await savedRes.json()
+            const savedIds = (savedData.data || []).map(s => s.job_listing_id)
+            finalJobs = finalJobs.map(job => ({ ...job, is_saved: savedIds.includes(job.id) }))
+          }
+        } catch(e) {}
+      }
+      setJobs(finalJobs)
     } catch (err) {
       console.error(err)
     } finally {
@@ -562,7 +582,15 @@ export default function DashboardPencari() {
         </aside>
 
         {selectedJob ? (
-          <DetailLowongan job={selectedJob} onKembali={handleKembali} showModal={showModal} />
+          <DetailLowongan 
+            job={selectedJob} 
+            onKembali={handleKembali} 
+            showModal={showModal} 
+            onUpdateJob={(updatedJob) => {
+              setSelectedJob(updatedJob)
+              setJobs(prev => prev.map(j => j.id === updatedJob.id ? updatedJob : j))
+            }}
+          />
         ) : (
           <main className="dp-main">
             {/* Search bar */}

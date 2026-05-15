@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './lowongan-saya.css'
 import './disimpan.css'
+import ModalAlert from '../komponen/ModalAlert'
 
 const IkonDashboard = () => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>)
 const IkonBriefcase = () => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>)
@@ -18,6 +19,12 @@ export default function MenungguReview() {
   const token = localStorage.getItem('token')
   const navigate = useNavigate()
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
+  const [modal, setModal] = useState({ show: false, title: '', message: '', type: 'alert' })
+
+  const showModalInfo = (title, message) => {
+    setModal({ show: true, title, message, type: 'alert' })
+  }
+  const closeModal = () => setModal(prev => ({ ...prev, show: false }))
 
   const handleLogout = () => {
     localStorage.removeItem('token')
@@ -66,7 +73,7 @@ export default function MenungguReview() {
   // Filter data dengan status "reviewed"
   const reviewedApps = applications.filter(app => app.status === 'reviewed')
 
-  const totalApps = applications.length
+  const totalApps = applications.length + savedJobs.length
   const pendingCount = applications.filter(a => a.status === 'pending').length
   const reviewedCount = reviewedApps.length
   const acceptedCount = applications.filter(a => a.status === 'accepted').length
@@ -233,7 +240,16 @@ export default function MenungguReview() {
                       <span className="ls-dot ls-dot-purple" />
                       Sedang Ditinjau
                     </span>
-                    <button className="ls-link-btn" style={{ marginTop: 'auto' }}>Lihat Detail</button>
+                    <button 
+                      className="ls-link-btn" 
+                      style={{ marginTop: 'auto' }}
+                      onClick={() => showModalInfo(
+                        'Lamaran Sedang Ditinjau',
+                        'Profil, CV, dan pengalaman Anda saat ini sedang dievaluasi oleh tim rekrutmen perusahaan. Proses peninjauan ini dilakukan secara saksama dan mungkin membutuhkan waktu beberapa saat. Kami harap Anda dapat menunggu dengan sabar. Status lamaran ini akan otomatis diperbarui begitu ada keputusan lebih lanjut dari pihak perusahaan.'
+                      )}
+                    >
+                      Lihat Detail
+                    </button>
                   </div>
                 </div>
               ))}
@@ -241,6 +257,7 @@ export default function MenungguReview() {
           )}
         </main>
       </div>
+      <ModalAlert {...modal} onClose={closeModal} />
     </div>
   )
 }
