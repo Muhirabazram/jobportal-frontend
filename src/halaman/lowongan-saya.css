@@ -1,0 +1,699 @@
+/* ════════════════════════════════════════════
+   LOWONGAN-SAYA.CSS
+   ════════════════════════════════════════════ */
+
+
+.ls-root {
+  min-height: 100vh;
+  background: #f0f3fb;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ══════════════════════════════════
+   NAVBAR
+══════════════════════════════════ */
+.ls-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 56px;
+  background: #ffffff;
+  border-bottom: 1px solid #e8ebf5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  flex-shrink: 0;
+}
+
+.ls-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 800;
+  color: #1a2540;
+  text-decoration: none;
+  letter-spacing: -0.3px;
+}
+
+.ls-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.ls-notif-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.ls-notif-btn:hover { background: #f3f4f6; }
+
+.ls-user { display: flex; align-items: center; gap: 10px; }
+
+.ls-username {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.ls-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════
+   BODY & SIDEBAR
+══════════════════════════════════ */
+.ls-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.ls-sidebar {
+  width: 196px;
+  flex-shrink: 0;
+  background: #ffffff;
+  border-right: 1px solid #e8ebf5;
+  padding: 24px 0 0;
+  min-height: calc(100vh - 56px);
+  position: sticky;
+  top: 56px;
+  align-self: flex-start;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+}
+
+.ls-sidebar-header {
+  padding: 0 18px 20px;
+  border-bottom: 1px solid #f0f3fb;
+}
+
+.ls-panel-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #9ca3af;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.ls-panel-sub {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.ls-sidenav {
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ls-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #6b7280;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.ls-nav-item:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.ls-nav-aktif {
+  background: #eff4ff !important;
+  color: #2563eb !important;
+  font-weight: 600;
+}
+
+.ls-nav-aktif svg { stroke: #2563eb; }
+
+/* ══════════════════════════════════
+   MAIN CONTENT
+══════════════════════════════════ */
+.ls-main {
+  flex: 1;
+  padding: 32px 32px 48px;
+  min-width: 0;
+}
+
+/* ─── Page Header ─── */
+.ls-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.ls-page-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1a2540;
+  letter-spacing: -0.4px;
+}
+
+.ls-btn-cari {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #2563eb;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.18s;
+  box-shadow: 0 3px 10px rgba(37,99,235,0.25);
+}
+
+.ls-btn-cari:hover { background: #1d4ed8; }
+
+/* ─── Tabs ─── */
+.ls-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-bottom: 1.5px solid #e5e8f0;
+  margin-bottom: 24px;
+}
+
+.ls-tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 16px;
+  border: none;
+  background: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  border-bottom: 2.5px solid transparent;
+  margin-bottom: -1.5px;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.ls-tab:hover { color: #374151; }
+
+.ls-tab-aktif {
+  color: #2563eb;
+  font-weight: 600;
+  border-bottom-color: #2563eb;
+}
+
+.ls-tab-count {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 20px;
+  background: #f0f3fb;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.ls-tab-count-blue {
+  background: #2563eb;
+  color: white;
+}
+
+/* ══════════════════════════════════
+   GRID KARTU
+══════════════════════════════════ */
+.ls-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* ── Kartu dasar ── */
+.ls-card {
+  background: #ffffff;
+  border: 1px solid #e8ebf5;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.ls-card:hover {
+  box-shadow: 0 4px 16px rgba(37,99,235,0.09);
+  border-color: #c7d7fd;
+}
+
+/* ══════════════════════════
+   FEATURED CARD (2 kolom)
+══════════════════════════ */
+.ls-card-featured {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ls-card-featured-inner {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+
+.ls-featured-content {
+  flex: 1;
+  padding: 26px 24px 20px;
+}
+
+/* Dekorasi gradasi kanan featured card */
+.ls-featured-deco {
+  width: 140px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #eef1fb 0%, #e2e9ff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.ls-featured-deco::before {
+  content: '';
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 28px solid rgba(37,99,235,0.08);
+  top: -30px;
+  right: -50px;
+}
+
+.ls-featured-deco::after {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 20px solid rgba(37,99,235,0.06);
+  bottom: 10px;
+  left: -20px;
+}
+
+.ls-featured-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+/* Logo Google */
+.ls-google-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: #1e1e2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  padding: 6px;
+  gap: 0;
+}
+
+.ls-featured-info { flex: 1; }
+
+.ls-featured-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1a2540;
+  margin-bottom: 4px;
+  letter-spacing: -0.3px;
+}
+
+.ls-featured-company {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 14px;
+}
+
+.ls-featured-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ls-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: #374151;
+  background: #f3f4f6;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-weight: 500;
+}
+
+.ls-tag-pill svg { color: #6b7280; }
+
+/* Featured footer */
+.ls-featured-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  border-top: 1px solid #f0f3fb;
+  background: #fafbff;
+}
+
+.ls-jadwal {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.ls-featured-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ls-link-btn {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  padding: 0;
+  transition: color 0.15s;
+}
+.ls-link-btn:hover { color: #1d4ed8; }
+
+.ls-btn-dokumen {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.18s;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.25);
+}
+.ls-btn-dokumen:hover { background: #1d4ed8; }
+
+/* ══════════════════════════
+   COMPACT CARD
+══════════════════════════ */
+.ls-card-compact {
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ls-compact-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.ls-compact-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a2540;
+  margin-bottom: 4px;
+}
+
+.ls-compact-company {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.ls-compact-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.ls-compact-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+/* ══════════════════════════
+   STANDARD CARD (Dropbox)
+══════════════════════════ */
+.ls-card-standard {
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ls-standard-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+/* Dropbox logo */
+.ls-dropbox-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #0061ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ls-standard-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a2540;
+  margin-bottom: 4px;
+}
+
+.ls-standard-company {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.ls-standard-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.ls-standard-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+/* ══════════════════════════
+   SAVED CARD
+══════════════════════════ */
+.ls-card-saved {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ls-saved-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ls-saved-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ls-saved-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a2540;
+  margin-bottom: 3px;
+}
+
+.ls-saved-company {
+  font-size: 12.5px;
+  color: #6b7280;
+}
+
+.ls-saved-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ls-btn-lamar {
+  width: 100%;
+  background: transparent;
+  border: 1.5px solid #2563eb;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #2563eb;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.18s;
+  margin-top: 4px;
+}
+
+.ls-btn-lamar:hover {
+  background: #eff4ff;
+}
+
+/* ── Company Avatar ── */
+.ls-company-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  font-size: 18px;
+  font-family: 'Inter', sans-serif;
+  flex-shrink: 0;
+}
+
+/* ── Badge Status ── */
+.ls-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 4px 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ls-badge-wawancara {
+  background: #fce7f3;
+  color: #be185d;
+}
+
+.ls-badge-ditinjau {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.ls-badge-terkirim {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.ls-badge-disimpan {
+  font-size: 10px;
+  letter-spacing: 0.8px;
+  background: #f3f4f6;
+  color: #9ca3af;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.ls-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ec4899;
+  flex-shrink: 0;
+}
+
+.ls-dot-purple { background: #7c3aed; }
+
+/* ── Meta items ── */
+.ls-meta-item-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12.5px;
+  color: #6b7280;
+}
+
+.ls-meta-item-sm svg { color: #9ca3af; }
+
+.ls-separator {
+  color: #d1d5db;
+  font-size: 12px;
+}
+
+.ls-waktu {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* ── Bookmark ── */
+.ls-bookmark-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  transition: transform 0.15s;
+}
+
+.ls-bookmark-btn:hover { transform: scale(1.1); }
+
+.ls-user {
+  position: relative;
+  cursor: pointer;
+}

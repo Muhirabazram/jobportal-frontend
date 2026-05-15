@@ -1,0 +1,222 @@
+/* ════════════════════════════════════════════
+   BUKA-LOWONGAN.CSS
+   ════════════════════════════════════════════ */
+
+.bl-root {
+  min-height: 100vh;
+  background: #f8f9fc;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+}
+
+/* Reusing generic HR sidebar styles directly or scoped */
+.bl-sidebar {
+  width: 240px;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #e2e8f0;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.bl-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 40px;
+}
+
+/* ── Top Header ── */
+.bl-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 24px;
+  transition: color 0.15s;
+}
+.bl-back-link:hover {
+  color: #1d4ed8;
+}
+
+.bl-page-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.bl-page-subtitle {
+  font-size: 14.5px;
+  color: #64748b;
+  margin-bottom: 32px;
+}
+
+/* ── Form Card ── */
+.bl-form-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.bl-form-row {
+  display: flex;
+  gap: 24px;
+}
+
+.bl-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.bl-form-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #334155;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.bl-form-hint {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: -4px;
+}
+
+.bl-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.bl-input, .bl-select, .bl-textarea {
+  width: 100%;
+  background: #f3f4f6; /* slightly darkish grayish blue like in image */
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #1e293b;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.bl-input:focus, .bl-select:focus, .bl-textarea:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+
+.bl-input::placeholder, .bl-textarea::placeholder, .bl-select {
+  color: #6b7280;
+}
+
+.bl-select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.bl-textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.5;
+}
+
+.bl-input.with-icon-left {
+  padding-left: 42px;
+}
+
+.bl-input-icon {
+  position: absolute;
+  color: #64748b;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bl-input-icon.left {
+  left: 14px;
+}
+
+.bl-input-text-icon {
+  position: absolute;
+  left: 14px;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+/* ── Select Dropdown Arrow ── */
+.bl-select-wrap {
+  position: relative;
+}
+.bl-select-wrap::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 6px;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-size: cover;
+  pointer-events: none;
+}
+
+/* ── Footer Actions ── */
+.bl-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.bl-btn-draft {
+  background: #c3d4ff;
+  color: #2563eb;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.bl-btn-draft:hover {
+  background: #aabfff;
+}
+
+.bl-btn-submit {
+  background: #0052cc;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 4px 12px rgba(0,82,204,0.2);
+  transition: background 0.2s;
+}
+.bl-btn-submit:hover {
+  background: #0047b3;
+}

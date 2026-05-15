@@ -1,0 +1,284 @@
+/* ════════════════════════════════════════════
+   DISIMPAN.CSS – Styles for Lowongan Saya Sub-tabs
+   ════════════════════════════════════════════ */
+
+/* ── Info Bar ── */
+.ds-info-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.ds-total {
+  font-size: 14px;
+  color: #374151;
+}
+
+.ds-total strong {
+  color: #1a2540;
+  font-weight: 700;
+}
+
+.ds-sort {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  color: #6b7280;
+}
+
+.ds-sort-select {
+  border: none;
+  background: transparent;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #2563eb;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+}
+
+/* ── Grid Disimpan ── */
+.ds-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.ds-card {
+  background: #ffffff;
+  border: 1px solid #e8ebf5;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.ds-card:hover {
+  box-shadow: 0 4px 16px rgba(37,99,235,0.09);
+  border-color: #c7d7fd;
+}
+
+.ds-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.ds-card-body {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.ds-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a2540;
+  margin-bottom: 6px;
+}
+
+.ds-company {
+  font-size: 13.5px;
+  color: #6b7280;
+  margin-bottom: 14px;
+}
+
+.ds-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ds-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ds-btn-hapus {
+  flex: 1;
+  background: white;
+  border: 1.5px solid #e5e7eb;
+  color: #6b7280;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+
+.ds-btn-hapus:hover {
+  background: #fef2f2;
+  border-color: #fca5a5;
+  color: #dc2626;
+}
+
+/* ── Lamaran Terkirim / Review / Wawancara List ── */
+.lt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lt-card {
+  background: #ffffff;
+  border: 1px solid #e8ebf5;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.lt-card-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+.lt-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.lt-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a2540;
+  margin-bottom: 4px;
+}
+
+.lt-company {
+  font-size: 13.5px;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.lt-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.lt-tanggal {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* Progress Steps */
+.lt-progress {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 1.5;
+  min-width: 300px;
+}
+
+.lt-step-wrap {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex: 1;
+}
+
+.lt-step-wrap:last-child {
+  flex: 0; /* Let the last node only occupy its own width */
+}
+
+.lt-step-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #e5e7eb;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.lt-step-aktif {
+  border-color: #2563eb;
+  background: #2563eb;
+}
+
+.lt-step-num {
+  font-size: 11px;
+  font-weight: 600;
+  color: #9ca3af;
+}
+
+.lt-step-label {
+  position: absolute;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 500;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+.lt-label-aktif {
+  color: #1a2540;
+  font-weight: 600;
+}
+
+.lt-step-line {
+  flex: 1;
+  height: 2px;
+  background: #e5e7eb;
+  position: relative;
+  z-index: 1;
+  margin-left: -2px;
+  margin-right: -2px;
+}
+
+.lt-line-aktif {
+  background: #2563eb;
+}
+
+/* Card Right */
+.lt-card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  width: 140px;
+  flex-shrink: 0;
+}
+
+.lt-btn-tarik {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.15s;
+  width: 100%;
+}
+
+.lt-btn-tarik:hover {
+  background: #fef2f2;
+  border-color: #fca5a5;
+  color: #dc2626;
+}

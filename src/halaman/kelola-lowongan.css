@@ -1,0 +1,638 @@
+/* ════════════════════════════════════════════
+   KELOLA-LOWONGAN.CSS
+   ════════════════════════════════════════════ */
+
+
+.kl-root {
+  min-height: 100vh;
+  background: #f8f9fc;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+}
+
+/* ══════════════════════════════════
+   SIDEBAR (Reused styling from HRD)
+══════════════════════════════════ */
+.kl-sidebar {
+  width: 240px;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #e2e8f0;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.kl-logo-area {
+  padding: 30px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.kl-logo-icon {
+  width: 38px;
+  height: 38px;
+  background: #2563eb; 
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kl-logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.kl-logo-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1d4ed8; 
+  line-height: 1.1;
+  letter-spacing: -0.3px;
+}
+
+.kl-logo-subtitle {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.kl-nav {
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kl-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.kl-nav-item:hover {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.kl-nav-aktif {
+  background: #eff6ff !important;
+  color: #2563eb !important;
+}
+
+.kl-nav-aktif svg {
+  stroke: #2563eb;
+}
+
+/* ══════════════════════════════════
+   MAIN CONTENT
+══════════════════════════════════ */
+.kl-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 40px;
+}
+
+/* ── Top Header Section ── */
+.kl-header-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.kl-header-left {
+  max-width: 500px;
+}
+
+.kl-page-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.kl-page-subtitle {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.kl-header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.kl-btn-tambah {
+  background: #0052cc;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 4px 12px rgba(0,82,204,0.2);
+  transition: background 0.2s;
+}
+
+.kl-btn-tambah:hover {
+  background: #0047b3;
+}
+
+.kl-profile-area {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-left: 1px solid #e2e8f0;
+  padding-left: 24px;
+}
+
+.kl-notif-btn {
+  background: none;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+}
+
+.kl-notif-dot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  background: #ef4444;
+  border-radius: 50%;
+  border: 1.5px solid #f8f9fc;
+}
+
+.kl-user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #8b5cf6;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;        /* jangan mengecil */
+}
+
+.kl-user-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;           /* penting agar teks bisa terpotong */
+}
+
+.kl-user-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  max-width: 120px;        /* batas lebar maksimal, sesuaikan */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kl-user-role {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* ── Dropdown Profil ── */
+.kl-user-profile {
+  display: flex;
+  align-items: center;    /* avatar dan teks sejajar vertikal */
+  gap: 10px;
+  cursor: pointer;
+  position: relative;
+  padding: 4px 0;
+}
+.kl-profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  padding: 6px 0;
+  min-width: 220px;
+  z-index: 50;
+}
+.kl-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.kl-dropdown-item:hover { background: #f3f4f6; }
+
+/* ── Stats Cards Grid ── */
+.kl-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.kl-stat-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.kl-stat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.kl-stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.kl-ic-blue { background: #dbeafe; color: #3b82f6; }
+.kl-ic-indigo { background: #e0e7ff; color: #4f46e5; }
+.kl-ic-gray { background: #f1f5f9; color: #475569; }
+
+.kl-stat-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kl-stat-value {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1;
+}
+
+/* ── List Area: Daftar Lowongan ── */
+.kl-list-container {
+  background: #f8f9fc;
+  border-radius: 16px;
+}
+
+.kl-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.kl-lh-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.kl-lh-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kl-lh-tab {
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.kl-lh-tab.active {
+  background: #ffffff;
+  color: #2563eb;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* Job Cards */
+.kl-job-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.kl-job-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+.kl-job-card.closed {
+  background: #fdfdfd;
+}
+.kl-job-card.closed .kl-jc-title { color: #64748b; }
+.kl-job-card.closed .kl-pelamar-count { color: #94a3b8; }
+.kl-job-card.closed .kl-pelamar-label { color: #cbd5e1; }
+
+.kl-jc-main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kl-jc-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.kl-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+.kl-badge-aktif {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+.kl-badge-ditutup {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.kl-jc-date {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.kl-jc-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+}
+
+.kl-jc-dept {
+  font-size: 13.5px;
+  color: #64748b;
+}
+
+.kl-jc-right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.kl-pelamar-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.kl-pelamar-count {
+  font-size: 24px;
+  font-weight: 800;
+  color: #1d4ed8;
+  line-height: 1.1;
+}
+
+.kl-pelamar-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.5px;
+}
+
+.kl-jc-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.kl-btn-action {
+  background: none;
+  border: none;
+  color: #475569;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: color 0.15s;
+}
+.kl-btn-action:hover { color: #0f172a; }
+.kl-btn-action.disabled {
+  color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.kl-btn-load {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: inherit;
+  margin-top: 24px;
+  cursor: pointer;
+}
+.kl-btn-load:hover { color: #1d4ed8; }
+
+/* ══════════════════════════════════
+   MODAL STYLING
+══════════════════════════════════ */
+.kl-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(226, 232, 240, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.kl-modal-content {
+  background: #ffffff;
+  width: 100%;
+  max-width: 580px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.kl-modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kl-mh-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.kl-btn-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.15s;
+}
+.kl-btn-close:hover { color: #475569; }
+
+.kl-modal-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.kl-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kl-form-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.kl-input {
+  width: 100%;
+  background: #f1f5f9;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #1e293b;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.kl-input:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #2563eb;
+}
+
+.kl-modal-footer {
+  padding: 20px 24px;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  background: #ffffff;
+  border-radius: 0 0 12px 12px;
+}
+
+.kl-btn-cancel {
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 10px 16px;
+  font-family: inherit;
+}
+.kl-btn-cancel:hover { color: #1e293b; }
+
+.kl-btn-submit {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+.kl-btn-submit:hover { background: #1d4ed8; }
+
+.kl-arsip-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed #e2e8f0;
+}
+.kl-arsip-row:last-child { border-bottom: none; }
+.kl-arsip-label { font-size: 12px; color: #64748b; font-weight: 600; }
+.kl-arsip-value { font-size: 15px; color: #0f172a; font-weight: 600; }
+
+.kl-btn-delete { color: #ef4444; }
+.kl-btn-delete:hover { border-color: #ef4444; background: #fef2f2; }
+
