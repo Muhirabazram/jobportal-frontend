@@ -1,0 +1,445 @@
+/* ════════════════════════════════════════════
+   RESPONSIVE.CSS – Global Responsive Overrides
+   ════════════════════════════════════════════ */
+
+@media screen and (max-width: 992px) {
+
+  /* GLOBAL LAYOUTS */
+  .dp-body,
+  .ls-body,
+  .hrd-body,
+  .kl-body,
+  .dpel-body,
+  .pengaturan-body,
+  .bl-body {
+    flex-direction: column !important;
+  }
+
+  /* SIDEBARS -> OFF CANVAS DRAWER */
+  .dp-sidebar,
+  .ls-sidebar,
+  .hrd-sidebar,
+  .kl-sidebar,
+  .dpel-sidebar,
+  .pengaturan-sidebar,
+  .bl-sidebar {
+    position: fixed !important;
+    top: 56px !important;
+    /* height of navbar */
+    left: -280px !important;
+    width: 250px !important;
+    height: calc(100vh - 56px) !important;
+    background: #ffffff !important;
+    z-index: 1000 !important;
+    padding: 24px 0 0 !important;
+    border-right: 1px solid #e8ebf5 !important;
+    transition: left 0.3s ease !important;
+    border-bottom: none !important;
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.05) !important;
+    overflow-y: auto !important;
+    display: block !important;
+  }
+
+  .dp-sidebar.sidebar-open,
+  .ls-sidebar.sidebar-open,
+  .hrd-sidebar.sidebar-open,
+  .kl-sidebar.sidebar-open,
+  .dpel-sidebar.sidebar-open,
+  .pengaturan-sidebar.sidebar-open,
+  .bl-sidebar.sidebar-open {
+    left: 0 !important;
+  }
+
+  .dp-sidebar-header,
+  .ls-sidebar-header,
+  .hrd-sidebar-header,
+  .kl-sidebar-header,
+  .dpel-sidebar-header,
+  .pengaturan-sidebar-header,
+  .bl-sidebar-header {
+    display: block !important;
+    /* Kembalikan label panel karir */
+  }
+
+  .dp-sidenav,
+  .ls-sidenav,
+  .hrd-sidenav,
+  .kl-sidenav,
+  .dpel-sidenav,
+  .pengaturan-sidenav,
+  .bl-sidenav {
+    flex-direction: column !important;
+    padding: 14px 10px !important;
+  }
+
+  .dp-nav-item,
+  .ls-nav-item,
+  .hrd-nav-item,
+  .kl-nav-item,
+  .dpel-nav-item,
+  .pengaturan-nav-item,
+  .bl-nav-item {
+    justify-content: flex-start !important;
+    padding: 9px 12px !important;
+    width: 100% !important;
+  }
+
+  .mobile-menu-btn {
+    display: flex !important;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 12px;
+    align-items: center;
+    color: #374151;
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    backdrop-filter: blur(2px);
+    display: block !important;
+  }
+
+  /* MAIN AREAS */
+  .dp-main,
+  .ls-main,
+  .hrd-main,
+  .kl-main,
+  .dpel-main,
+  .pengaturan-main,
+  .bl-main {
+    padding: 16px !important;
+  }
+
+  /* DASHBOARD PENCARI */
+  .dp-content-row {
+    flex-direction: column !important;
+  }
+
+  .dp-filter-panel {
+    width: 100% !important;
+    margin-bottom: 16px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 16px !important;
+  }
+
+  .dp-filter-section {
+    margin-bottom: 0 !important;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .dp-searchbar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .dp-search-divider {
+    display: none !important;
+  }
+
+  .dp-search-input-wrap {
+    padding: 10px 0 !important;
+    border-bottom: 1px solid #e8ebf5;
+  }
+
+  .dp-btn-cari {
+    margin-top: 10px;
+  }
+
+  /* JOB CARDS */
+  .dp-job-card {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .dp-job-card-left {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .dp-job-card-right {
+    width: 100% !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+
+  .dp-job-meta {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+  }
+
+  /* JOB DETAIL (DASHBOARD) */
+  .detail-content-row {
+    flex-direction: column !important;
+  }
+
+  .detail-col-left,
+  .detail-col-right {
+    width: 100% !important;
+  }
+
+  .detail-header-card {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 16px !important;
+  }
+
+  .detail-header-left {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .detail-header-right {
+    width: 100% !important;
+    justify-content: flex-end !important;
+    margin-top: 12px !important;
+  }
+
+  .detail-meta-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+  }
+
+  .detail-meta-sep {
+    display: none !important;
+  }
+
+  /* LOWONGAN SAYA & LAMARAN TERKIRIM */
+  .ls-tabs {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  .ls-tab {
+    flex: 1 1 calc(50% - 8px) !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+
+  .lt-card {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .lt-card-left {
+    flex-direction: column !important;
+  }
+
+  .lt-progress {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .lt-step-line {
+    width: 2px !important;
+    height: 20px !important;
+    margin-left: 14px !important;
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .lt-card-right {
+    width: 100% !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-top: 12px !important;
+  }
+
+  /* DISIMPAN GRID */
+  .ds-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* HRD DASHBOARD */
+  .hrd-stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hrd-content-row {
+    flex-direction: column !important;
+  }
+
+  .hrd-main-col,
+  .hrd-side-col {
+    width: 100% !important;
+  }
+
+  /* KELOLA LOWONGAN */
+  .kl-header-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .kl-header-actions {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+
+  .kl-searchbar {
+    width: 100% !important;
+  }
+
+  .kl-job-card {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+
+  .kl-jc-left {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .kl-jc-right {
+    width: 100% !important;
+    justify-content: space-between !important;
+    padding-top: 12px !important;
+    border-top: 1px dashed #e2e8f0 !important;
+  }
+
+  .kl-stats-wrap {
+    justify-content: flex-start !important;
+    margin-top: 12px !important;
+  }
+
+  /* DATA PELAMAR */
+  .dpel-header-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .dpel-header-actions {
+    width: 100% !important;
+    flex-wrap: wrap !important;
+  }
+
+  .dpel-card {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .dpel-card-left {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+  }
+
+  .dpel-card-right {
+    width: 100% !important;
+    justify-content: flex-start !important;
+    margin-top: 16px !important;
+  }
+
+  .dpel-meta-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+  }
+
+  .dpel-meta-sep {
+    display: none !important;
+  }
+
+  .dpel-action-btn {
+    flex: 1 !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+
+  /* BUKA LOWONGAN / FORM */
+  .bl-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .bl-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .bl-form-actions {
+    flex-direction: column !important;
+  }
+
+  .bl-btn-submit,
+  .bl-btn-cancel {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* PENGATURAN */
+  .pengaturan-content {
+    padding: 16px !important;
+  }
+
+  .pengaturan-form-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  .pengaturan-profile-card {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+
+  .pengaturan-avatar-wrapper {
+    margin: 0 auto 16px !important;
+  }
+
+  .pengaturan-action-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    margin-bottom: 8px !important;
+  }
+
+  /* NAVBAR GLOBAL */
+  .dp-navbar,
+  .ls-navbar,
+  .hrd-navbar,
+  .kl-navbar,
+  .dpel-navbar,
+  .pengaturan-navbar,
+  .bl-navbar {
+    padding: 0 16px !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .dp-urutan {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .detail-lamar-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .ls-tab {
+    flex: 1 1 100% !important;
+  }
+}
+
+.mobile-menu-btn {
+  display: none;
+}
+
+.sidebar-overlay {
+  display: none;
+}

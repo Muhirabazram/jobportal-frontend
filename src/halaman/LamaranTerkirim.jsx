@@ -14,6 +14,7 @@ const IkonKerja = () => (<svg width="12" height="12" viewBox="0 0 24 24" fill="n
 const stepLabels = ['Lamaran Dikirim', 'Tinjauan CV', 'Wawancara', 'Penawaran']
 
 export default function LamaranTerkirim() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [applications, setApplications] = useState([])
   const [savedJobs, setSavedJobs] = useState([])
   const [loading, setLoading] = useState(true)
@@ -28,6 +29,7 @@ export default function LamaranTerkirim() {
   const closeModal = () => setModal(prev => ({ ...prev, show: false }))
 
   const navigate = useNavigate()
+
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
 
   const handleLogout = () => {
@@ -54,10 +56,10 @@ export default function LamaranTerkirim() {
     const fetchData = async () => {
       try {
         const [appRes, savedRes] = await Promise.all([
-          fetch('http://localhost:8000/api/my-applications', {
+          fetch('https://jobportal-api-zebb.onrender.com/api/my-applications', {
             headers: { 'Authorization': `Bearer ${token}` }
           }),
-          fetch('http://localhost:8000/api/saved-jobs', {
+          fetch('https://jobportal-api-zebb.onrender.com/api/saved-jobs', {
             headers: { 'Authorization': `Bearer ${token}` }
           })
         ])
@@ -96,7 +98,7 @@ export default function LamaranTerkirim() {
   const handleTarikLamaran = (appId) => {
     showModal('Konfirmasi Penarikan', 'Apakah Anda yakin ingin menarik lamaran ini?', 'confirm', async () => {
       try {
-        const res = await fetch(`http://localhost:8000/api/applications/${appId}`, {
+        const res = await fetch(`https://jobportal-api-zebb.onrender.com/api/applications/${appId}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${token}` }
         })
@@ -114,7 +116,7 @@ export default function LamaranTerkirim() {
   const handleDetailClick = async (app) => {
     setDetailLoading(true)
     try {
-      const res = await fetch('http://localhost:8000/api/profile', {
+      const res = await fetch('https://jobportal-api-zebb.onrender.com/api/profile', {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       const profileData = await res.json()
@@ -131,6 +133,16 @@ export default function LamaranTerkirim() {
     <div className="ls-root">
       {/* ══ NAVBAR ══ */}
       <nav className="ls-navbar">
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
         <Link to="/dashboard" className="ls-logo">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <rect x="2" y="7" width="20" height="14" rx="2" />
@@ -182,7 +194,14 @@ export default function LamaranTerkirim() {
 
       <div className="ls-body">
         {/* ══ SIDEBAR ══ */}
-        <aside className="ls-sidebar">
+
+        {isSidebarOpen && (
+          <div
+            className="sidebar-overlay"
+            onClick={() => setIsSidebarOpen(false)}
+          ></div>
+        )}
+        <aside className={`ls-sidebar ${isSidebarOpen ? "sidebar-open" : ""}`}>
           <div className="ls-sidebar-header">
             <p className="ls-panel-label">PANEL KARIR</p>
             <p className="ls-panel-sub">Kurasi Karir Anda</p>
@@ -233,7 +252,7 @@ export default function LamaranTerkirim() {
                   <div className="lt-card-left">
                     {app.job_listing?.company?.logo ? (
                       <img
-                        src={`http://localhost:8000/storage/${app.job_listing.company.logo}`}
+                        src={`https://jobportal-api-zebb.onrender.com/storage/${app.job_listing.company.logo}`}
                         alt={app.job_listing.company.company_name}
                         className="ls-company-avatar"
                         style={{ width: 52, height: 52, borderRadius: 14, objectFit: 'cover', background: 'white', padding: '2px', flexShrink: 0 }}

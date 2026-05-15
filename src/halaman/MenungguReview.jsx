@@ -4,20 +4,22 @@ import './lowongan-saya.css'
 import './disimpan.css'
 import ModalAlert from '../komponen/ModalAlert'
 
-const IkonDashboard = () => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>)
-const IkonBriefcase = () => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>)
-const IkonSettings = () => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>)
-const IkonLokasi = () => (<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>)
-const IkonKerja = () => (<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>)
+const IkonDashboard = () => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /></svg>)
+const IkonBriefcase = () => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" /></svg>)
+const IkonSettings = () => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" /></svg>)
+const IkonLokasi = () => (<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>)
+const IkonKerja = () => (<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" /></svg>)
 
 const stepLabels = ['Lamaran Dikirim', 'Tinjauan CV', 'Wawancara', 'Penawaran']
 
 export default function MenungguReview() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [applications, setApplications] = useState([])
   const [savedJobs, setSavedJobs] = useState([])
   const [loading, setLoading] = useState(true)
   const token = localStorage.getItem('token')
   const navigate = useNavigate()
+
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
   const [modal, setModal] = useState({ show: false, title: '', message: '', type: 'alert' })
 
@@ -50,10 +52,10 @@ export default function MenungguReview() {
     const fetchData = async () => {
       try {
         const [appRes, savedRes] = await Promise.all([
-          fetch('http://localhost:8000/api/my-applications', {
+          fetch('https://jobportal-api-zebb.onrender.com/api/my-applications', {
             headers: { 'Authorization': `Bearer ${token}` }
           }),
-          fetch('http://localhost:8000/api/saved-jobs', {
+          fetch('https://jobportal-api-zebb.onrender.com/api/saved-jobs', {
             headers: { 'Authorization': `Bearer ${token}` }
           })
         ])
@@ -81,20 +83,30 @@ export default function MenungguReview() {
   const savedCount = savedJobs.length
 
   const TABS = [
-    { id: 'semua',     label: `Semua (${totalApps})`, to: '/lowongan-saya' },
-    { id: 'disimpan',  label: 'Lowongan Disimpan', count: savedCount, to: '/lowongan-disimpan' },
-    { id: 'terkirim',  label: 'Lamaran Terkirim',  count: pendingCount, to: '/lamaran-terkirim' },
-    { id: 'review',    label: 'Menunggu Review',   count: reviewedCount, to: '/menunggu-review' },
-    { id: 'wawancara', label: 'Wawancara',         count: acceptedCount, to: '/wawancara', countBlue: true },
-    { id: 'ditolak',   label: 'Ditolak', count: rejectedCount, to: '/lamaran-ditolak', countRed: true },
+    { id: 'semua', label: `Semua (${totalApps})`, to: '/lowongan-saya' },
+    { id: 'disimpan', label: 'Lowongan Disimpan', count: savedCount, to: '/lowongan-disimpan' },
+    { id: 'terkirim', label: 'Lamaran Terkirim', count: pendingCount, to: '/lamaran-terkirim' },
+    { id: 'review', label: 'Menunggu Review', count: reviewedCount, to: '/menunggu-review' },
+    { id: 'wawancara', label: 'Wawancara', count: acceptedCount, to: '/wawancara', countBlue: true },
+    { id: 'ditolak', label: 'Ditolak', count: rejectedCount, to: '/lamaran-ditolak', countRed: true },
   ]
 
   return (
     <div className="ls-root">
       {/* ══ NAVBAR ══ */}
       <nav className="ls-navbar">
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
         <Link to="/dashboard" className="ls-logo">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" /></svg>
           <span>JobPortal</span>
         </Link>
         <div className="ls-navbar-right">
@@ -141,7 +153,14 @@ export default function MenungguReview() {
 
       <div className="ls-body">
         {/* ══ SIDEBAR ══ */}
-        <aside className="ls-sidebar">
+
+        {isSidebarOpen && (
+          <div
+            className="sidebar-overlay"
+            onClick={() => setIsSidebarOpen(false)}
+          ></div>
+        )}
+        <aside className={`ls-sidebar ${isSidebarOpen ? "sidebar-open" : ""}`}>
           <div className="ls-sidebar-header">
             <p className="ls-panel-label">PANEL KARIR</p>
             <p className="ls-panel-sub">Kurasi Karir Anda</p>
@@ -158,7 +177,7 @@ export default function MenungguReview() {
           <div className="ls-page-header">
             <h1 className="ls-page-title">Lowongan Saya</h1>
             <Link to="/dashboard" className="ls-btn-cari">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
               Cari Lowongan Baru
             </Link>
           </div>
@@ -191,11 +210,11 @@ export default function MenungguReview() {
                 <div key={app.id} className="lt-card">
                   <div className="lt-card-left">
                     {app.job_listing?.company?.logo ? (
-                      <img 
-                        src={`http://localhost:8000/storage/${app.job_listing.company.logo}`} 
-                        alt={app.job_listing.company.company_name} 
-                        className="ls-company-avatar" 
-                        style={{ width: 52, height: 52, borderRadius: 14, objectFit: 'cover', background: 'white', padding: '2px', flexShrink: 0 }} 
+                      <img
+                        src={`https://jobportal-api-zebb.onrender.com/storage/${app.job_listing.company.logo}`}
+                        alt={app.job_listing.company.company_name}
+                        className="ls-company-avatar"
+                        style={{ width: 52, height: 52, borderRadius: 14, objectFit: 'cover', background: 'white', padding: '2px', flexShrink: 0 }}
                       />
                     ) : (
                       <div className="ls-company-avatar" style={{ background: '#3b5bdb', width: 52, height: 52, borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
@@ -222,7 +241,7 @@ export default function MenungguReview() {
                       <div key={i} className="lt-step-wrap">
                         <div className={`lt-step-circle ${i <= 1 ? 'lt-step-aktif' : ''}`}>
                           {i <= 1 ? (
-                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
                           ) : (
                             <span className="lt-step-num">{i + 1}</span>
                           )}
@@ -240,8 +259,8 @@ export default function MenungguReview() {
                       <span className="ls-dot ls-dot-purple" />
                       Sedang Ditinjau
                     </span>
-                    <button 
-                      className="ls-link-btn" 
+                    <button
+                      className="ls-link-btn"
                       style={{ marginTop: 'auto' }}
                       onClick={() => showModalInfo(
                         'Lamaran Sedang Ditinjau',

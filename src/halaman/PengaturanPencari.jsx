@@ -47,7 +47,9 @@ const UserAvatarImage = () => (
 )
 
 export default function PengaturanPencari() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate()
+  
   const fileInputRef = useRef(null)
 
   // State profil
@@ -342,7 +344,14 @@ export default function PengaturanPencari() {
       )}
 
       <div className="pp-body">
-        <aside className="pp-sidebar">
+        
+        {isSidebarOpen && (
+          <div 
+            className="sidebar-overlay" 
+            onClick={() => setIsSidebarOpen(false)}
+          ></div>
+        )}
+        <aside className={`pp-sidebar ${isSidebarOpen ? "sidebar-open" : ""}`}>
           <Link to="/dashboard" className="pp-logo">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <rect x="2" y="7" width="20" height="14" rx="2" />

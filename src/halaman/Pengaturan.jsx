@@ -59,7 +59,9 @@ const UserAvatarImage = () => (
 
 // ---------- Komponen Utama ----------
 export default function Pengaturan() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
+  
   const fileInputRef = useRef(null);
 
   // State profil
@@ -296,7 +298,14 @@ export default function Pengaturan() {
   return (
     <div className="hrset-root">
       {/* SIDEBAR */}
-      <aside className="hrset-sidebar">
+      
+        {isSidebarOpen && (
+          <div 
+            className="sidebar-overlay" 
+            onClick={() => setIsSidebarOpen(false)}
+          ></div>
+        )}
+        <aside className={`hrset-sidebar ${isSidebarOpen ? "sidebar-open" : ""}`}>
         <Link to="/" className="hrset-logo-area">
           <div className="hrset-logo-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

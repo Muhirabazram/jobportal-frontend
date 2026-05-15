@@ -13,12 +13,14 @@ const IkonKerja = () => (<svg width="12" height="12" viewBox="0 0 24 24" fill="n
 const IkonBookmark = ({ filled }) => (<svg width="16" height="16" viewBox="0 0 24 24" fill={filled ? '#2563eb' : 'none'} stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" /></svg>)
 
 export default function LowonganDisimpan() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [savedJobs, setSavedJobs] = useState([])
   const [applications, setApplications] = useState([])
   const [loading, setLoading] = useState(true)
   const token = localStorage.getItem('token')
 
   const navigate = useNavigate()
+
   const [modal, setModal] = useState({ show: false, title: '', message: '', type: 'alert', onConfirm: null, confirmText: '' })
   const showModal = (title, message, type = 'alert', onConfirm = null, confirmText = '') => setModal({ show: true, title, message, type, onConfirm, confirmText })
   const closeModal = () => setModal(prev => ({ ...prev, show: false }))
@@ -54,8 +56,8 @@ export default function LowonganDisimpan() {
     const fetchData = async () => {
       try {
         const [savedRes, appRes] = await Promise.all([
-          fetch('http://localhost:8000/api/saved-jobs', { headers: { 'Authorization': `Bearer ${token}` } }),
-          fetch('http://localhost:8000/api/my-applications', { headers: { 'Authorization': `Bearer ${token}` } })
+          fetch('https://jobportal-api-zebb.onrender.com/api/saved-jobs', { headers: { 'Authorization': `Bearer ${token}` } }),
+          fetch('https://jobportal-api-zebb.onrender.com/api/my-applications', { headers: { 'Authorization': `Bearer ${token}` } })
         ])
         const savedData = await savedRes.json()
         const appData = await appRes.json()
@@ -71,7 +73,7 @@ export default function LowonganDisimpan() {
   }, [])
 
   const handleUnsave = async (slug) => {
-    await fetch(`http://localhost:8000/api/jobs/${slug}/unsave`, {
+    await fetch(`https://jobportal-api-zebb.onrender.com/api/jobs/${slug}/unsave`, {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${token}` }
     })
@@ -86,7 +88,7 @@ export default function LowonganDisimpan() {
 
     setLamarLoading(true)
     try {
-      const res = await fetch('http://localhost:8000/api/profile', {
+      const res = await fetch('https://jobportal-api-zebb.onrender.com/api/profile', {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       const profileData = await res.json()
@@ -115,7 +117,7 @@ export default function LowonganDisimpan() {
     if (!selectedJob) return
     setLamarLoading(true)
     try {
-      const res = await fetch(`http://localhost:8000/api/jobs/${selectedJob.slug}/apply`, {
+      const res = await fetch(`https://jobportal-api-zebb.onrender.com/api/jobs/${selectedJob.slug}/apply`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -159,6 +161,16 @@ export default function LowonganDisimpan() {
     <div className="ls-root">
       {/* ══ NAVBAR ══ */}
       <nav className="ls-navbar">
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
         <Link to="/dashboard" className="ls-logo">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" /></svg>
           <span>JobPortal</span>
@@ -207,7 +219,14 @@ export default function LowonganDisimpan() {
 
       <div className="ls-body">
         {/* ══ SIDEBAR ══ */}
-        <aside className="ls-sidebar">
+
+        {isSidebarOpen && (
+          <div
+            className="sidebar-overlay"
+            onClick={() => setIsSidebarOpen(false)}
+          ></div>
+        )}
+        <aside className={`ls-sidebar ${isSidebarOpen ? "sidebar-open" : ""}`}>
           <div className="ls-sidebar-header">
             <p className="ls-panel-label">PANEL KARIR</p>
             <p className="ls-panel-sub">Kurasi Karir Anda</p>
@@ -266,7 +285,7 @@ export default function LowonganDisimpan() {
                       <div className="ds-card-body">
                         {job?.company?.logo ? (
                           <img
-                            src={`http://localhost:8000/storage/${job?.company.logo}`}
+                            src={`https://jobportal-api-zebb.onrender.com/storage/${job?.company.logo}`}
                             alt={job?.company?.company_name}
                             className="ls-company-avatar"
                             style={{ width: 44, height: 44, borderRadius: 10, objectFit: 'cover', background: 'white', padding: '2px', marginBottom: 12 }}

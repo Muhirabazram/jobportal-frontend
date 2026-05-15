@@ -23,7 +23,7 @@ export default function LowonganDetail() {
   useEffect(() => {
     const fetchDetail = async () => {
       try {
-        const res = await fetch(`http://localhost:8000/api/jobs/${slug}`)
+        const res = await fetch(`https://jobportal-api-zebb.onrender.com/api/jobs/${slug}`)
         if (!res.ok) throw new Error('Lowongan tidak ditemukan')
         const data = await res.json()
         setJob(data)
@@ -45,7 +45,7 @@ export default function LowonganDetail() {
 
     setLamarLoading(true)
     try {
-      const res = await fetch(`http://localhost:8000/api/jobs/${slug}/apply`, {
+      const res = await fetch(`https://jobportal-api-zebb.onrender.com/api/jobs/${slug}/apply`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

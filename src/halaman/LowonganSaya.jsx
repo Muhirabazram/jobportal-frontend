@@ -54,7 +54,9 @@ function BadgeStatus({ status }) {
 }
 
 export default function LowonganSaya() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate()
+
   const [applications, setApplications] = useState([])
   const [savedJobs, setSavedJobs] = useState([])
   const [loading, setLoading] = useState(true)
@@ -93,10 +95,10 @@ export default function LowonganSaya() {
     const fetchData = async () => {
       try {
         const [appRes, savedRes] = await Promise.all([
-          fetch('http://localhost:8000/api/my-applications', {
+          fetch('https://jobportal-api-zebb.onrender.com/api/my-applications', {
             headers: { 'Authorization': `Bearer ${token}` }
           }),
-          fetch('http://localhost:8000/api/saved-jobs', {
+          fetch('https://jobportal-api-zebb.onrender.com/api/saved-jobs', {
             headers: { 'Authorization': `Bearer ${token}` }
           })
         ])
@@ -114,7 +116,7 @@ export default function LowonganSaya() {
   }, [])
 
   const handleUnsave = async (slug) => {
-    await fetch(`http://localhost:8000/api/jobs/${slug}/unsave`, {
+    await fetch(`https://jobportal-api-zebb.onrender.com/api/jobs/${slug}/unsave`, {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${token}` }
     })
@@ -129,7 +131,7 @@ export default function LowonganSaya() {
 
     setLamarLoading(true)
     try {
-      const res = await fetch('http://localhost:8000/api/profile', {
+      const res = await fetch('https://jobportal-api-zebb.onrender.com/api/profile', {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       const profileData = await res.json()
@@ -158,7 +160,7 @@ export default function LowonganSaya() {
     if (!selectedJob) return
     setLamarLoading(true)
     try {
-      const res = await fetch(`http://localhost:8000/api/jobs/${selectedJob.slug}/apply`, {
+      const res = await fetch(`https://jobportal-api-zebb.onrender.com/api/jobs/${selectedJob.slug}/apply`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -200,6 +202,16 @@ export default function LowonganSaya() {
     <div className="ls-root">
       {/* ══ NAVBAR ══ */}
       <nav className="ls-navbar">
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
         <Link to="/dashboard" className="ls-logo">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <rect x="2" y="7" width="20" height="14" rx="2" />
@@ -251,7 +263,14 @@ export default function LowonganSaya() {
 
       <div className="ls-body">
         {/* ══ SIDEBAR ══ */}
-        <aside className="ls-sidebar">
+
+        {isSidebarOpen && (
+          <div
+            className="sidebar-overlay"
+            onClick={() => setIsSidebarOpen(false)}
+          ></div>
+        )}
+        <aside className={`ls-sidebar ${isSidebarOpen ? "sidebar-open" : ""}`}>
           <div className="ls-sidebar-header">
             <p className="ls-panel-label">PANEL KARIR</p>
             <p className="ls-panel-sub">Kurasi Karir Anda</p>
@@ -309,7 +328,7 @@ export default function LowonganSaya() {
                   <div className="ls-compact-header">
                     {app.job_listing?.company?.logo ? (
                       <img
-                        src={`http://localhost:8000/storage/${app.job_listing.company.logo}`}
+                        src={`https://jobportal-api-zebb.onrender.com/storage/${app.job_listing.company.logo}`}
                         alt={app.job_listing.company.company_name}
                         className="ls-company-avatar"
                         style={{ width: 44, height: 44, borderRadius: 10, objectFit: 'cover', background: 'white', padding: '2px' }}
@@ -332,8 +351,8 @@ export default function LowonganSaya() {
                   </div>
                   <div className="ls-compact-footer">
                     <span className="ls-waktu">Dilamar {new Date(app.created_at).toLocaleDateString('id-ID')}</span>
-                    <button 
-                      className="ls-link-btn" 
+                    <button
+                      className="ls-link-btn"
                       onClick={() => {
                         if (app.status === 'pending') navigate('/lamaran-terkirim');
                         else if (app.status === 'reviewed') navigate('/menunggu-review');
@@ -347,7 +366,7 @@ export default function LowonganSaya() {
                   </div>
                 </div>
               ))}
-              
+
               {savedJobs.map(item => {
                 const job = item.job_listing
                 return (
@@ -361,7 +380,7 @@ export default function LowonganSaya() {
                     <div className="ds-card-body">
                       {job?.company?.logo ? (
                         <img
-                          src={`http://localhost:8000/storage/${job?.company.logo}`}
+                          src={`https://jobportal-api-zebb.onrender.com/storage/${job?.company.logo}`}
                           alt={job?.company?.company_name}
                           className="ls-company-avatar"
                           style={{ width: 44, height: 44, borderRadius: 10, objectFit: 'cover', background: 'white', padding: '2px', marginBottom: 12 }}

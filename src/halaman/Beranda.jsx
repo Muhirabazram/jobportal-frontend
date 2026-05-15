@@ -58,7 +58,7 @@ export default function Beranda() {
   });
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/home-stats')
+    fetch('https://jobportal-api-zebb.onrender.com/api/home-stats')
       .then((res) => res.json())
       .then((data) => setStats(data))
       .catch((err) => console.error('Gagal fetch statistik:', err));
@@ -127,7 +127,7 @@ export default function Beranda() {
 
         {/* Statistik */}
         <div className="max-w-3xl mx-auto mt-10">
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div
               className="bg-blue-500/40 backdrop-blur-sm rounded-xl py-5 text-center border border-blue-400/30">
               <div className="text-2xl font-bold text-white">{stats.job_count.toLocaleString('id-ID')}+</div>

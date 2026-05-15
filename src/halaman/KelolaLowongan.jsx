@@ -22,11 +22,13 @@ const IkonTrash = () => (<svg width="18" height="18" viewBox="0 0 24 24" fill="n
 const IkonRefresh = () => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>)
 
 export default function KelolaLowongan() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('semua')
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(false)
   const token = localStorage.getItem('token')
   const navigate = useNavigate()
+
 
   // ── Data User ──
   const user = JSON.parse(localStorage.getItem('user') || 'null')
@@ -65,7 +67,7 @@ export default function KelolaLowongan() {
   const fetchJobs = async () => {
     setLoading(true)
     try {
-      const res = await fetch('http://localhost:8000/api/my-jobs', {
+      const res = await fetch('https://jobportal-api-zebb.onrender.com/api/my-jobs', {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       const data = await res.json()
@@ -100,7 +102,7 @@ export default function KelolaLowongan() {
 
   const handleCloseJob = (id) => {
     showModal('Konfirmasi', 'Tutup lowongan ini?', 'confirm', async () => {
-      await fetch(`http://localhost:8000/api/jobs/${id}`, {
+      await fetch(`https://jobportal-api-zebb.onrender.com/api/jobs/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -115,7 +117,7 @@ export default function KelolaLowongan() {
 
   const handleReopenJob = (id) => {
     showModal('Konfirmasi', 'Buka kembali lowongan ini?', 'confirm', async () => {
-      await fetch(`http://localhost:8000/api/jobs/${id}`, {
+      await fetch(`https://jobportal-api-zebb.onrender.com/api/jobs/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -130,7 +132,7 @@ export default function KelolaLowongan() {
 
   const handleDeleteJob = (id) => {
     showModal('Konfirmasi', 'Hapus permanen?', 'confirm', async () => {
-      await fetch(`http://localhost:8000/api/jobs/${id}`, {
+      await fetch(`https://jobportal-api-zebb.onrender.com/api/jobs/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       })
@@ -151,7 +153,7 @@ export default function KelolaLowongan() {
     }
 
     try {
-      await fetch(`http://localhost:8000/api/jobs/${job.id}`, {
+      await fetch(`https://jobportal-api-zebb.onrender.com/api/jobs/${job.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -169,7 +171,14 @@ export default function KelolaLowongan() {
   return (
     <div className="kl-root">
       {/* SIDEBAR */}
-      <aside className="kl-sidebar">
+
+      {isSidebarOpen && (
+        <div
+          className="sidebar-overlay"
+          onClick={() => setIsSidebarOpen(false)}
+        ></div>
+      )}
+      <aside className={`kl-sidebar ${isSidebarOpen ? "sidebar-open" : ""}`}>
         <div className="kl-logo-area">
           <div className="kl-logo-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -193,6 +202,16 @@ export default function KelolaLowongan() {
       {/* MAIN */}
       <main className="kl-main">
         <div className="kl-header-section">
+          <button
+            className="mobile-menu-btn"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
           <div className="kl-header-left">
             <h1 className="kl-page-title">Kelola Lowongan</h1>
             <p className="kl-page-subtitle">Pantau dan kelola semua posisi pekerjaan yang sedang berjalan atau ditutup.</p>

@@ -45,11 +45,11 @@ export default function CariKerja() {
 
   // Ambil daftar kategori & tipe dari backend
   useEffect(() => {
-    fetch('http://localhost:8000/api/categories')
+    fetch('https://jobportal-api-zebb.onrender.com/api/categories')
       .then(res => res.json())
       .then(data => setKategoriList(data))
       .catch(err => console.error('Gagal fetch kategori', err))
-    fetch('http://localhost:8000/api/job-types')
+    fetch('https://jobportal-api-zebb.onrender.com/api/job-types')
       .then(res => res.json())
       .then(data => setTipeList(data))
       .catch(err => console.error('Gagal fetch job-types', err))
@@ -65,7 +65,7 @@ export default function CariKerja() {
     tipeDipilih.forEach(slug => params.append('job_types[]', slug))
 
     try {
-      const res = await fetch(`http://localhost:8000/api/jobs?${params.toString()}`)
+      const res = await fetch(`https://jobportal-api-zebb.onrender.com/api/jobs?${params.toString()}`)
       const data = await res.json()
       setJobs(data.data) // Laravel paginate: { data: [...], ... }
     } catch (err) {
@@ -195,9 +195,9 @@ export default function CariKerja() {
       )}
 
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex gap-6">
+        <div className="flex flex-col md:flex-row gap-6">
           {/* Sidebar Filter */}
-          <aside className="w-64 shrink-0">
+          <aside className="w-full md:w-64 shrink-0">
             <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm sticky top-20">
               <h2 className="font-bold text-gray-800 text-base mb-5">Filter Pencarian</h2>
 
@@ -253,8 +253,8 @@ export default function CariKerja() {
           {/* Konten Utama */}
           <div className="flex-1 min-w-0">
             {/* Search Bar */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2 flex gap-2 shadow-sm mb-5">
-              <div className="flex items-center gap-2 flex-1 px-3">
+            <div className="bg-white rounded-xl border border-gray-200 p-2 flex flex-col md:flex-row gap-2 shadow-sm mb-5">
+              <div className="flex items-center gap-2 flex-1 px-3 py-1 border-b md:border-b-0 md:border-r border-gray-200">
                 <Search size={18} className="text-gray-400 shrink-0" />
                 <input
                   type="text"
@@ -265,7 +265,6 @@ export default function CariKerja() {
                   className="flex-1 text-gray-700 text-sm outline-none py-2 bg-transparent"
                 />
               </div>
-              <div className="w-px bg-gray-200" />
               <div className="flex items-center gap-2 flex-1 px-3">
                 <MapPin size={18} className="text-gray-400 shrink-0" />
                 <input
@@ -286,7 +285,7 @@ export default function CariKerja() {
             </div>
 
             {/* Info Hasil + Urutkan */}
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
               <p className="font-bold text-gray-800 text-lg">
                 {displayedJobs.length} lowongan ditemukan
                 {(kataCariAktif || lokasiCariAktif) && (
@@ -338,8 +337,8 @@ export default function CariKerja() {
                   const warna = getWarnaKategori(namaKategori)
 
                   // Parsing Tanggung Jawab dan Persyaratan jika tergabung dalam satu string requirements
-                  let tanggungJawabArr = job.responsibilities 
-                    ? job.responsibilities.split(/[\n]+/).map(s => s.replace(/^[-•*]\s*/, '').trim()).filter(Boolean) 
+                  let tanggungJawabArr = job.responsibilities
+                    ? job.responsibilities.split(/[\n]+/).map(s => s.replace(/^[-•*]\s*/, '').trim()).filter(Boolean)
                     : [];
                   let persyaratanArr = [];
                   let reqText = job.requirements || '';
@@ -382,10 +381,10 @@ export default function CariKerja() {
                       <div className="flex items-start gap-4">
                         {/* Logo Perusahaan */}
                         {job.company?.logo ? (
-                          <img 
-                            src={`http://localhost:8000/storage/${job.company.logo}`} 
-                            alt={job.company?.company_name || 'Logo'} 
-                            className="w-14 h-14 rounded-xl object-cover shrink-0 border border-gray-100" 
+                          <img
+                            src={`https://jobportal-api-zebb.onrender.com/storage/${job.company.logo}`}
+                            alt={job.company?.company_name || 'Logo'}
+                            className="w-14 h-14 rounded-xl object-cover shrink-0 border border-gray-100"
                           />
                         ) : (
                           <div className={`w-14 h-14 rounded-xl ${warna.bg} flex items-center justify-center shrink-0`}>
@@ -394,12 +393,12 @@ export default function CariKerja() {
                         )}
 
                         {/* Info Lowongan */}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1 min-w-0 w-full">
+                          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4">
                             <div>
                               <h3 className="font-bold text-gray-800 text-base">{job.title}</h3>
                               <p className="text-gray-500 text-sm mt-0.5">{job.company?.company_name || 'Perusahaan'}</p>
-                              
+
                               <div className="flex flex-wrap gap-2 mt-2">
                                 {job.category?.name && (
                                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
@@ -413,8 +412,8 @@ export default function CariKerja() {
                                 )}
                               </div>
                             </div>
-                            <div className="text-right shrink-0">
-                              <p className="text-xs text-gray-400 mb-3">{job.created_at ? new Date(job.created_at).toLocaleDateString('id-ID') : ''}</p>
+                            <div className="text-left sm:text-right shrink-0">
+                              <p className="text-xs text-gray-400 mb-2 sm:mb-3">{job.created_at ? new Date(job.created_at).toLocaleDateString('id-ID') : ''}</p>
                               <button
                                 onClick={() => {
                                   const token = localStorage.getItem('token')

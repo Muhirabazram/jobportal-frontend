@@ -193,7 +193,7 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const res = await fetch('http://localhost:8000/api/login', {
+      const res = await fetch('https://jobportal-api-zebb.onrender.com/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -235,7 +235,7 @@ export default function Login() {
       setForgotLoading(true)
 
       try {
-        const res = await fetch('http://localhost:8000/api/check-email', {
+        const res = await fetch('https://jobportal-api-zebb.onrender.com/api/check-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: forgotEmail })
@@ -262,7 +262,7 @@ export default function Login() {
       setForgotLoading(true)
 
       try {
-        const res = await fetch('http://localhost:8000/api/reset-password', {
+        const res = await fetch('https://jobportal-api-zebb.onrender.com/api/reset-password', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: forgotEmail, new_password: newPassword })

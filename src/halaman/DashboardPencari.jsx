@@ -29,6 +29,7 @@ const IkonSettings = () => (
 /* ── KOMPONEN DETAIL LOWONGAN ── */
 function DetailLowongan({ job, onKembali, showModal, onUpdateJob }) {
   const navigate = useNavigate()
+
   const [disimpan, setDisimpan] = useState(job.is_saved || false)
 
   useEffect(() => {
@@ -43,17 +44,17 @@ function DetailLowongan({ job, onKembali, showModal, onUpdateJob }) {
   useEffect(() => {
     const checkApplied = async () => {
       const token = localStorage.getItem('token')
-      if(!token) return
+      if (!token) return
       try {
-        const res = await fetch('http://localhost:8000/api/my-applications', {
+        const res = await fetch('https://jobportal-api-zebb.onrender.com/api/my-applications', {
           headers: { 'Authorization': `Bearer ${token}` }
         })
-        if(res.ok) {
+        if (res.ok) {
           const data = await res.json()
           const applied = (data.data || []).some(app => app.job_listing_id === job.id)
           setIsAlreadyApplied(applied)
         }
-      } catch(e) {}
+      } catch (e) { }
     }
     checkApplied()
   }, [job])
@@ -73,16 +74,16 @@ function DetailLowongan({ job, onKembali, showModal, onUpdateJob }) {
 
     setLamarLoading(true)
     try {
-      const res = await fetch('http://localhost:8000/api/profile', {
+      const res = await fetch('https://jobportal-api-zebb.onrender.com/api/profile', {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       const profileData = await res.json()
-      
+
       if (!profileData.name || !profileData.phone || !profileData.location || !profileData.bio || !profileData.cv_url) {
         showModal(
-          'Profil Belum Lengkap', 
-          'Mohon lengkapi informasi pribadi dan upload CV Anda terlebih dahulu pada halaman Pengaturan.', 
-          'confirm', 
+          'Profil Belum Lengkap',
+          'Mohon lengkapi informasi pribadi dan upload CV Anda terlebih dahulu pada halaman Pengaturan.',
+          'confirm',
           () => navigate('/pengaturan-pencari'),
           'Pergi ke Pengaturan'
         )
@@ -101,7 +102,7 @@ function DetailLowongan({ job, onKembali, showModal, onUpdateJob }) {
     const token = localStorage.getItem('token')
     setLamarLoading(true)
     try {
-      const res = await fetch(`http://localhost:8000/api/jobs/${job.slug}/apply`, {
+      const res = await fetch(`https://jobportal-api-zebb.onrender.com/api/jobs/${job.slug}/apply`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -130,15 +131,15 @@ function DetailLowongan({ job, onKembali, showModal, onUpdateJob }) {
     try {
       const endpoint = disimpan ? 'unsave' : 'save'
       const method = disimpan ? 'DELETE' : 'POST'
-      
-      const res = await fetch(`http://localhost:8000/api/jobs/${job.slug}/${endpoint}`, {
+
+      const res = await fetch(`https://jobportal-api-zebb.onrender.com/api/jobs/${job.slug}/${endpoint}`, {
         method,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         }
       })
-      
+
       if (!res.ok) throw new Error('Gagal menyimpan lowongan')
       setDisimpan(!disimpan)
       if (onUpdateJob) onUpdateJob({ ...job, is_saved: !disimpan })
@@ -192,11 +193,11 @@ function DetailLowongan({ job, onKembali, showModal, onUpdateJob }) {
       <div className="detail-header-card">
         <div className="detail-header-left">
           {job.company?.logo ? (
-            <img 
-              src={`http://localhost:8000/storage/${job.company.logo}`} 
-              alt={job.company.company_name} 
-              className="detail-job-icon" 
-              style={{ objectFit: 'cover', background: 'white', padding: '2px' }} 
+            <img
+              src={`https://jobportal-api-zebb.onrender.com/storage/${job.company.logo}`}
+              alt={job.company.company_name}
+              className="detail-job-icon"
+              style={{ objectFit: 'cover', background: 'white', padding: '2px' }}
             />
           ) : (
             <div className="detail-job-icon" style={{ background: '#3b5bdb' }}>
@@ -299,11 +300,11 @@ function DetailLowongan({ job, onKembali, showModal, onUpdateJob }) {
 
             <div className="detail-company-header">
               {job.company?.logo ? (
-                <img 
-                  src={`http://localhost:8000/storage/${job.company.logo}`} 
-                  alt="Logo Perusahaan" 
-                  className="detail-company-icon" 
-                  style={{ width: 44, height: 44, borderRadius: 10, objectFit: 'cover', background: 'transparent' }} 
+                <img
+                  src={`https://jobportal-api-zebb.onrender.com/storage/${job.company.logo}`}
+                  alt="Logo Perusahaan"
+                  className="detail-company-icon"
+                  style={{ width: 44, height: 44, borderRadius: 10, objectFit: 'cover', background: 'transparent' }}
                 />
               ) : (
                 <div className="detail-company-icon" style={{ background: '#3b5bdb', width: 44, height: 44, borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -391,6 +392,7 @@ function DetailLowongan({ job, onKembali, showModal, onUpdateJob }) {
 
 /* ═══════════════════════ HALAMAN UTAMA ═══════════════════════ */
 export default function DashboardPencari() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate()
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(false)
@@ -434,19 +436,19 @@ export default function DashboardPencari() {
       const headers = {}
       if (token) headers['Authorization'] = `Bearer ${token}`
 
-      const res = await fetch(`http://localhost:8000/api/jobs?${params.toString()}`, { headers })
+      const res = await fetch(`https://jobportal-api-zebb.onrender.com/api/jobs?${params.toString()}`, { headers })
       const data = await res.json()
-      
+
       let finalJobs = data.data
       if (token) {
         try {
-          const savedRes = await fetch('http://localhost:8000/api/saved-jobs', { headers })
+          const savedRes = await fetch('https://jobportal-api-zebb.onrender.com/api/saved-jobs', { headers })
           if (savedRes.ok) {
             const savedData = await savedRes.json()
             const savedIds = (savedData.data || []).map(s => s.job_listing_id)
             finalJobs = finalJobs.map(job => ({ ...job, is_saved: savedIds.includes(job.id) }))
           }
-        } catch(e) {}
+        } catch (e) { }
       }
       setJobs(finalJobs)
     } catch (err) {
@@ -510,6 +512,16 @@ export default function DashboardPencari() {
     <div className="dp-root">
       {/* NAVBAR */}
       <nav className="dp-navbar">
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
         <Link to="/dashboard" className="dp-logo">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <rect x="2" y="7" width="20" height="14" rx="2" />
@@ -560,7 +572,14 @@ export default function DashboardPencari() {
       </nav>
 
       <div className="dp-body">
-        <aside className="dp-sidebar">
+
+        {isSidebarOpen && (
+          <div
+            className="sidebar-overlay"
+            onClick={() => setIsSidebarOpen(false)}
+          ></div>
+        )}
+        <aside className={`dp-sidebar ${isSidebarOpen ? "sidebar-open" : ""}`}>
           <div className="dp-sidebar-header">
             <p className="dp-panel-label">PANEL KARIR</p>
             <p className="dp-panel-sub">Kurasi Karir Anda</p>
@@ -582,10 +601,10 @@ export default function DashboardPencari() {
         </aside>
 
         {selectedJob ? (
-          <DetailLowongan 
-            job={selectedJob} 
-            onKembali={handleKembali} 
-            showModal={showModal} 
+          <DetailLowongan
+            job={selectedJob}
+            onKembali={handleKembali}
+            showModal={showModal}
             onUpdateJob={(updatedJob) => {
               setSelectedJob(updatedJob)
               setJobs(prev => prev.map(j => j.id === updatedJob.id ? updatedJob : j))
@@ -654,11 +673,11 @@ export default function DashboardPencari() {
                   <div key={job.id} className="dp-job-card">
                     <div className="dp-job-card-left">
                       {job.company?.logo ? (
-                        <img 
-                          src={`http://localhost:8000/storage/${job.company.logo}`} 
-                          alt={job.company?.company_name} 
-                          className="dp-job-icon" 
-                          style={{ objectFit: 'cover', background: 'white', padding: '2px' }} 
+                        <img
+                          src={`https://jobportal-api-zebb.onrender.com/storage/${job.company.logo}`}
+                          alt={job.company?.company_name}
+                          className="dp-job-icon"
+                          style={{ objectFit: 'cover', background: 'white', padding: '2px' }}
                         />
                       ) : (
                         <div className="dp-job-icon" style={{ background: '#3b5bdb' }}>

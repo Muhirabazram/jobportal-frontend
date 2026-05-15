@@ -32,7 +32,7 @@ export default function Navigasi() {
   return (
     <nav className="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex flex-wrap items-center justify-between h-auto py-3 gap-4">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 text-blue-600 font-bold text-xl">
             <Briefcase size={22} className="text-blue-600" />
@@ -40,7 +40,7 @@ export default function Navigasi() {
           </Link>
 
           {/* Menu Tengah */}
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-6 md:gap-8 order-last w-full md:w-auto md:order-none justify-center">
             <Link
               to="/"
               className={`text-sm font-medium pb-1 transition-colors ${
