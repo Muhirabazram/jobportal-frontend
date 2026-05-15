@@ -52,9 +52,9 @@ export default function Beranda() {
   const [locationInput, setLocationInput] = useState('');
 
   const [stats, setStats] = useState({
-    job_count: 1850,
-    company_count: 350,
-    candidate_count: 12000,
+    job_count: 0,
+    company_count: 0,
+    candidate_count: 0,
   });
 
   useEffect(() => {
