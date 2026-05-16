@@ -98,7 +98,7 @@ export default function LamaranDitolak() {
   ]
 
   const handleTarikLamaran = (appId) => {
-    showModal('Konfirmasi Penghapusan', 'Apakah Anda yakin ingin menghapus riwayat lamaran ini?', 'confirm', async () => {
+    showModal('Konfirmasi Penghapusan', /'Apakah Anda yakin ingin menghapus riwayat lamaran ini? Data juga akan terhapus dari sisi HRD.'/, 'confirm', async () => {
       try {
         const res = await fetch(`https://jobportal-api-zebb.onrender.com/api/applications/${appId}`, {
           method: 'DELETE',
@@ -290,9 +290,7 @@ export default function LamaranDitolak() {
                   </div>
 
                   <div className="lt-card-right">
-                    <button className="lt-btn-tarik" onClick={() => handleTarikLamaran(app.id)} style={{ color: '#64748b', borderColor: '#cbd5e1' }}>
-                      Hapus Riwayat
-                    </button>
+                    <button className="lt-btn-tarik" onClick={() => handleTarikLamaran(app.id)} style={{ color: '#64748b', borderColor: '#cbd5e1' }}>Hapus Data</button>
                     <button className="ls-link-btn" onClick={() => handleDetailClick(app)} disabled={detailLoading}>
                       {detailLoading ? 'Memuat...' : 'Lihat Detail'}
                     </button>
