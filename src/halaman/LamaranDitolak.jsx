@@ -98,7 +98,7 @@ export default function LamaranDitolak() {
   ]
 
   const handleTarikLamaran = (appId) => {
-    showModal('Konfirmasi Penghapusan', /'Apakah Anda yakin ingin menghapus riwayat lamaran ini? Data juga akan terhapus dari sisi HRD.'/, 'confirm', async () => {
+    showModal('Konfirmasi Penghapusan', 'Apakah Anda yakin ingin menghapus riwayat lamaran ini? Data juga akan terhapus dari sisi HRD.', 'confirm', async () => {
       try {
         const res = await fetch(`https://jobportal-api-zebb.onrender.com/api/applications/${appId}`, {
           method: 'DELETE',

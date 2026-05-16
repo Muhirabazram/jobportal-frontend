@@ -87,6 +87,7 @@ export default function LamaranDiterima() {
         })
         if (!res.ok) throw new Error('Gagal menghapus riwayat')
         setApplications(prev => prev.filter(a => a.id !== appId))
+        closeModal()
       } catch (err) {
         showModalAlert('Kesalahan', err.message, 'alert')
       }
@@ -292,25 +293,27 @@ export default function LamaranDiterima() {
       </div>
     
       {showModal && selectedApp && (
-        <div className="dpl-modal-overlay">
-          <div className="dpl-modal-content">
-            <h3 className="dpl-modal-title">Riwayat Seleksi</h3>
-            <p className="dpl-modal-text">Rekam jejak proses seleksi untuk <strong>{selectedApp.job_listing?.title}</strong> di <strong>{selectedApp.job_listing?.company?.company_name}</strong>.</p>
-            <div className="dpl-timeline">
-              {[
-                { label: 'Lamaran Dikirim', sub: `${new Date(selectedApp.created_at).toLocaleDateString('id-ID')} – CV dan portofolio berhasil terkirim`, done: true },
-                { label: 'Penyaringan Awal', sub: 'Lolos seleksi administrasi', done: true },
-                { label: 'Wawancara', sub: 'Selesai', done: true },
-                { label: 'Diterima & Direkrut', sub: 'Selamat! Anda diterima bekerja di posisi ini.', done: true }
-              ].map((t, i) => (
-                <div key={i} className="dpl-tl-item">
-                  <div className={`dpl-tl-dot ${t.done ? 'done' : ''}`} />
-                  <div className="dpl-tl-content"><strong>{t.label}</strong><span>{t.sub}</span></div>
-                </div>
-              ))}
-            </div>
-            <div className="dpl-modal-actions right">
-              <button className="dpl-btn-primary" onClick={() => setShowModal(false)}>Tutup Riwayat</button>
+        <div className="dpl-modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="dpl-modal-box" onClick={e => e.stopPropagation()}>
+            <div className="dpl-modal-content">
+              <h3 className="dpl-modal-title">Riwayat Seleksi</h3>
+              <p className="dpl-modal-text">Rekam jejak proses seleksi untuk <strong>{selectedApp.job_listing?.title}</strong> di <strong>{selectedApp.job_listing?.company?.company_name}</strong>.</p>
+              <div className="dpl-timeline">
+                {[
+                  { label: 'Lamaran Dikirim', sub: `${new Date(selectedApp.created_at).toLocaleDateString('id-ID')} – CV dan portofolio berhasil terkirim`, done: true },
+                  { label: 'Penyaringan Awal', sub: 'Lolos seleksi administrasi', done: true },
+                  { label: 'Wawancara', sub: 'Selesai', done: true },
+                  { label: 'Diterima & Direkrut', sub: 'Selamat! Anda diterima bekerja di posisi ini.', done: true }
+                ].map((t, i) => (
+                  <div key={i} className="dpl-tl-item">
+                    <div className={`dpl-tl-dot ${t.done ? 'done' : ''}`} />
+                    <div className="dpl-tl-content"><strong>{t.label}</strong><span>{t.sub}</span></div>
+                  </div>
+                ))}
+              </div>
+              <div className="dpl-modal-actions right">
+                <button className="dpl-btn-primary" onClick={() => setShowModal(false)}>Tutup Riwayat</button>
+              </div>
             </div>
           </div>
         </div>

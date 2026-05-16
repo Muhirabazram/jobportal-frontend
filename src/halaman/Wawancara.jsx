@@ -258,7 +258,7 @@ export default function Wawancara() {
                       <span className="ls-dot" />
                       Wawancara
                     </span>
-                    <button className="ls-link-btn" style={{ marginTop: 'auto' }} onClick={() => setShowPrepModal(true)}>Siapkan Dokumen</button>
+                    <button className="ls-link-btn" style={{ marginTop: 'auto' }} onClick={() => setShowPrepModal(true)}>Lihat Detail</button>
                   </div>
                 </div>
               ))}
@@ -267,20 +267,22 @@ export default function Wawancara() {
                 
       {showPrepModal && (
         <div className="dpl-modal-overlay" onClick={() => setShowPrepModal(false)}>
-          <div className="dpl-modal-content" style={{ maxWidth: '500px' }} onClick={e => e.stopPropagation()}>
-            <h3 className="dpl-modal-title" style={{ color: '#1e40af' }}>Persiapan Wawancara</h3>
-            <p className="dpl-modal-text">Selamat! Anda telah mencapai tahap Wawancara. Berikut adalah beberapa hal yang perlu Anda siapkan:</p>
-            <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '8px', padding: '16px', marginTop: '12px', marginBottom: '20px' }}>
-              <ul style={{ paddingLeft: '20px', margin: 0, color: '#1e40af', fontSize: '14px', lineHeight: '1.6' }}>
-                <li><strong>Pelajari Perusahaan:</strong> Riset mendalam tentang visi, misi, dan produk perusahaan.</li>
-                <li><strong>Siapkan Portofolio:</strong> Bawa atau siapkan tautan portofolio dan dokumen pendukung lainnya.</li>
-                <li><strong>Pahami Posisi:</strong> Baca kembali deskripsi pekerjaan dan siapkan jawaban untuk pertanyaan umum terkait posisi tersebut.</li>
-                <li><strong>Pakaian Profesional:</strong> Kenakan pakaian yang rapi dan sesuai dengan budaya perusahaan.</li>
-                <li><strong>Tepat Waktu:</strong> Hadir 10-15 menit lebih awal dari jadwal yang ditentukan.</li>
-              </ul>
-            </div>
-            <div className="dpl-modal-actions right">
-              <button className="dpl-btn-solid" style={{ background: '#2563eb' }} onClick={() => setShowPrepModal(false)}>Saya Mengerti</button>
+          <div className="dpl-modal-box" style={{ maxWidth: '500px' }} onClick={e => e.stopPropagation()}>
+            <div className="dpl-modal-content">
+              <h3 className="dpl-modal-title" style={{ color: '#1e40af' }}>Persiapan Wawancara</h3>
+              <p className="dpl-modal-text">Selamat! Anda telah mencapai tahap Wawancara. Berikut adalah beberapa hal yang perlu Anda siapkan:</p>
+              <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '8px', padding: '16px', marginTop: '12px', marginBottom: '20px' }}>
+                <ul style={{ paddingLeft: '20px', margin: 0, color: '#1e40af', fontSize: '14px', lineHeight: '1.6' }}>
+                  <li><strong>Pelajari Perusahaan:</strong> Riset mendalam tentang visi, misi, dan produk perusahaan.</li>
+                  <li><strong>Siapkan Portofolio:</strong> Bawa atau siapkan tautan portofolio dan dokumen pendukung lainnya.</li>
+                  <li><strong>Pahami Posisi:</strong> Baca kembali deskripsi pekerjaan dan siapkan jawaban untuk pertanyaan umum terkait posisi tersebut.</li>
+                  <li><strong>Pakaian Profesional:</strong> Kenakan pakaian yang rapi dan sesuai dengan budaya perusahaan.</li>
+                  <li><strong>Tepat Waktu:</strong> Hadir 10-15 menit lebih awal dari jadwal yang ditentukan.</li>
+                </ul>
+              </div>
+              <div className="dpl-modal-actions right">
+                <button className="dpl-btn-solid" style={{ background: '#2563eb' }} onClick={() => setShowPrepModal(false)}>Saya Mengerti</button>
+              </div>
             </div>
           </div>
         </div>
