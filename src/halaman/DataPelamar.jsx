@@ -95,7 +95,7 @@ function KartuPelamar({ app, onAksi }) {
   const tanggal = new Date(app.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
 
   const AksiBtn = () => {
-    if (app.status === 'pending') return <button className="dpl-btn-primary" onClick={() => onAksi('profil', app)}>Lihat CV & Profil</button>;
+    if (app.status === 'pending') return <button className="dpl-btn-primary" onClick={() => onAksi('profil', app)}>Lihat Profil</button>;
     if (app.status === 'reviewed') return <button className="dpl-btn-primary" onClick={() => onAksi('proses', app)}>Proses Kandidat</button>;
     if (app.status === 'accepted') return <button className="dpl-btn-solid" onClick={() => onAksi('penilaian', app)}>Beri Keputusan</button>;
     if (app.status === 'rejected') return <button className="dpl-btn-link" onClick={() => onAksi('histori', app)}>Riwayat Seleksi</button>;
@@ -364,10 +364,6 @@ function Modal({ type, candidate, onClose, onSave }) {
           <div className="dpl-modal-content">
             <h3 className="dpl-modal-title">Keputusan Seleksi</h3>
             <p className="dpl-modal-text">Tentukan hasil akhir wawancara untuk <strong>{candidate.user?.name}</strong> — posisi <strong>{candidate.job_listing?.title}</strong>.</p>
-            <div className="dpl-form-group">
-              <label>Catatan HR:</label>
-              <textarea className="dpl-textarea" rows="4" placeholder="Tuliskan catatan evaluasi atau alasan keputusan..." />
-            </div>
             <div className="dpl-modal-actions-split">
               <button className="dpl-btn-reject" onClick={() => {
                 fetch(`https://jobportal-api-zebb.onrender.com/api/applications/${candidate.id}/status`, {
