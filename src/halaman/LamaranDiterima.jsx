@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './lowongan-saya.css'
 import './disimpan.css'
+import './data-pelamar.css'
 
 const IkonDashboard = () => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /></svg>)
 const IkonBriefcase = () => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" /></svg>)
@@ -14,6 +15,8 @@ const stepLabels = ['Lamaran Dikirim', 'Tinjauan CV', 'Wawancara', 'Diterima']
 export default function LamaranDiterima() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [applications, setApplications] = useState([])
+  const [showModal, setShowModal] = useState(false)
+  const [selectedApp, setSelectedApp] = useState(null)
   const [savedJobs, setSavedJobs] = useState([])
   const [loading, setLoading] = useState(true)
   const token = localStorage.getItem('token')
@@ -71,7 +74,7 @@ export default function LamaranDiterima() {
   const totalApps = applications.length + savedJobs.length
   const pendingCount = applications.filter(a => a.status === 'pending').length
   const reviewedCount = applications.filter(a => a.status === 'reviewed').length
-  const acceptedCount = hiredApps.length
+  const acceptedCount = applications.filter(a => a.status === 'accepted').length
   const rejectedCount = applications.filter(a => a.status === 'rejected').length
   const hiredCount = applications.filter(a => a.status === 'hired').length
   const savedCount = savedJobs.length
@@ -81,7 +84,7 @@ export default function LamaranDiterima() {
     { id: 'disimpan', label: 'Lowongan Disimpan', count: savedCount, to: '/lowongan-disimpan' },
     { id: 'terkirim', label: 'Lamaran Terkirim', count: pendingCount, to: '/lamaran-terkirim' },
     { id: 'review', label: 'Menunggu Review', count: reviewedCount, to: '/menunggu-review' },
-    { id: 'wawancara', label: 'Wawancara', count: acceptedCount, to: '/wawancara', countBlue: true },
+    { id: 'wawancara', label: 'Wawancara', count: acceptedCount, to: '/wawancara', countBlue: false },
     { id: 'ditolak', label: 'Ditolak', count: rejectedCount, to: '/lamaran-ditolak', countRed: true },
     { id: 'diterima', label: 'Diterima', count: hiredCount, to: '/lamaran-diterima', countGreen: true },
   ]
@@ -256,7 +259,7 @@ export default function LamaranDiterima() {
                       <span className="ls-dot" />
                       Diterima
                     </span>
-                    <button className="ls-link-btn" style={{ marginTop: 'auto' }}>Lihat Detail</button>
+                    <button className="ls-link-btn" style={{ marginTop: 'auto' }} onClick={() => { setSelectedApp(app); setShowModal(true); }}>Lihat Detail</button>
                   </div>
                 </div>
               ))}
@@ -264,6 +267,31 @@ export default function LamaranDiterima() {
           )}
         </main>
       </div>
-    </div>
+    
+      {showModal && selectedApp && (
+        <div className="dpl-modal-overlay">
+          <div className="dpl-modal-content">
+            <h3 className="dpl-modal-title">Riwayat Seleksi</h3>
+            <p className="dpl-modal-text">Rekam jejak proses seleksi untuk <strong>{selectedApp.job_listing?.title}</strong> di <strong>{selectedApp.job_listing?.company?.company_name}</strong>.</p>
+            <div className="dpl-timeline">
+              {[
+                { label: 'Lamaran Dikirim', sub: `${new Date(selectedApp.created_at).toLocaleDateString('id-ID')} – CV dan portofolio berhasil terkirim`, done: true },
+                { label: 'Penyaringan Awal', sub: 'Lolos seleksi administrasi', done: true },
+                { label: 'Wawancara', sub: 'Selesai', done: true },
+                { label: 'Diterima & Direkrut', sub: 'Selamat! Anda diterima bekerja di posisi ini.', done: true }
+              ].map((t, i) => (
+                <div key={i} className="dpl-tl-item">
+                  <div className={`dpl-tl-dot ${t.done ? 'done' : ''}`} />
+                  <div className="dpl-tl-content"><strong>{t.label}</strong><span>{t.sub}</span></div>
+                </div>
+              ))}
+            </div>
+            <div className="dpl-modal-actions right">
+              <button className="dpl-btn-primary" onClick={() => setShowModal(false)}>Tutup Riwayat</button>
+            </div>
+          </div>
+        </div>
+      )}
+</div>
   )
 }

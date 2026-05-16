@@ -154,7 +154,7 @@ export default function LowonganDisimpan() {
     { id: 'disimpan', label: 'Lowongan Disimpan', count: savedCount, to: '/lowongan-disimpan' },
     { id: 'terkirim', label: 'Lamaran Terkirim', count: pendingCount, to: '/lamaran-terkirim' },
     { id: 'review', label: 'Menunggu Review', count: reviewedCount, to: '/menunggu-review' },
-    { id: 'wawancara', label: 'Wawancara', count: acceptedCount, to: '/wawancara', countBlue: true },
+    { id: 'wawancara', label: 'Wawancara', count: acceptedCount, to: '/wawancara', countBlue: false },
     { id: 'ditolak', label: 'Ditolak', count: rejectedCount, to: '/lamaran-ditolak', countRed: true },
     { id: 'diterima', label: 'Diterima', count: hiredCount, to: '/lamaran-diterima', countGreen: true },
   ]

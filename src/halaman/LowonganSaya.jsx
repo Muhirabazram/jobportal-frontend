@@ -195,7 +195,7 @@ export default function LowonganSaya() {
     { id: 'disimpan', label: 'Lowongan Disimpan', count: savedCount, to: '/lowongan-disimpan' },
     { id: 'terkirim', label: 'Lamaran Terkirim', count: pendingCount, to: '/lamaran-terkirim' },
     { id: 'review', label: 'Menunggu Review', count: reviewedCount, to: '/menunggu-review' },
-    { id: 'wawancara', label: 'Wawancara', count: acceptedCount, to: '/wawancara', countBlue: true },
+    { id: 'wawancara', label: 'Wawancara', count: acceptedCount, to: '/wawancara', countBlue: false },
     { id: 'ditolak', label: 'Ditolak', count: rejectedCount, to: '/lamaran-ditolak', countRed: true },
     { id: 'diterima', label: 'Diterima', count: hiredCount, to: '/lamaran-diterima', countGreen: true },
   ]
@@ -360,6 +360,7 @@ export default function LowonganSaya() {
                         else if (app.status === 'reviewed') navigate('/menunggu-review');
                         else if (app.status === 'accepted') navigate('/wawancara');
                         else if (app.status === 'rejected') navigate('/lamaran-ditolak');
+                        else if (app.status === 'hired') navigate('/lamaran-diterima');
                         else navigate('/lamaran-terkirim'); // Default fallback
                       }}
                     >
