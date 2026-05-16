@@ -73,6 +73,7 @@ export default function Wawancara() {
   const reviewedCount = applications.filter(a => a.status === 'reviewed').length
   const acceptedCount = acceptedApps.length
   const rejectedCount = applications.filter(a => a.status === 'rejected').length
+  const hiredCount = applications.filter(a => a.status === 'hired').length
   const savedCount = savedJobs.length
 
   const TABS = [
@@ -82,6 +83,7 @@ export default function Wawancara() {
     { id: 'review', label: 'Menunggu Review', count: reviewedCount, to: '/menunggu-review' },
     { id: 'wawancara', label: 'Wawancara', count: acceptedCount, to: '/wawancara', countBlue: true },
     { id: 'ditolak', label: 'Ditolak', count: rejectedCount, to: '/lamaran-ditolak', countRed: true },
+    { id: 'diterima', label: 'Diterima', count: hiredCount, to: '/lamaran-diterima', countGreen: true },
   ]
 
   return (

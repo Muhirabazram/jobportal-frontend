@@ -251,6 +251,16 @@
   color: white;
 }
 
+.ls-tab-count-green {
+  background: #10b981;
+  color: white;
+}
+
+.ls-tab-count-red {
+  background: #ef4444;
+  color: white;
+}
+
 /* ══════════════════════════════════
    GRID KARTU
 ══════════════════════════════════ */
@@ -638,6 +648,16 @@
 .ls-badge-terkirim {
   background: #f3f4f6;
   color: #6b7280;
+}
+
+.ls-badge-diterima {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.ls-badge-ditolak {
+  background: #fee2e2;
+  color: #dc2626;
 }
 
 .ls-badge-disimpan {

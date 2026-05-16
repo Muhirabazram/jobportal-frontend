@@ -10,6 +10,7 @@ import LowonganDisimpan from './halaman/LowonganDisimpan'
 import LamaranTerkirim from './halaman/LamaranTerkirim'
 import MenungguReview from './halaman/MenungguReview'
 import Wawancara from './halaman/Wawancara'
+import LamaranDiterima from './halaman/LamaranDiterima'
 import LamaranDitolak from './halaman/LamaranDitolak'
 import Pengaturan from './halaman/Pengaturan'
 import DashboardHRD from './halaman/DashboardHRD'
@@ -44,6 +45,7 @@ function App() {
         <Route path="/lamaran-terkirim" element={<ProtectedRoute><LamaranTerkirim /></ProtectedRoute>} />
         <Route path="/menunggu-review" element={<ProtectedRoute><MenungguReview /></ProtectedRoute>} />
         <Route path="/wawancara" element={<ProtectedRoute><Wawancara /></ProtectedRoute>} />
+        <Route path="/lamaran-diterima" element={<ProtectedRoute><LamaranDiterima /></ProtectedRoute>} />
         <Route path="/lamaran-ditolak" element={<ProtectedRoute><LamaranDitolak /></ProtectedRoute>} />
         <Route path="/pengaturan" element={<ProtectedRoute><Pengaturan /></ProtectedRoute>} />
         <Route path="/dashboard-hrd" element={<ProtectedRoute><DashboardHRD /></ProtectedRoute>} />

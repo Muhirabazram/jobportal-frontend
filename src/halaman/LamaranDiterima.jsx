@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './lowongan-saya.css'
 import './disimpan.css'
-import ModalAlert from '../komponen/ModalAlert'
-import ModalPreviewLamaran from '../komponen/ModalPreviewLamaran'
 
 const IkonDashboard = () => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /></svg>)
 const IkonBriefcase = () => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" /></svg>)
@@ -13,21 +11,12 @@ const IkonKerja = () => (<svg width="12" height="12" viewBox="0 0 24 24" fill="n
 
 const stepLabels = ['Lamaran Dikirim', 'Tinjauan CV', 'Wawancara', 'Penawaran']
 
-export default function LamaranDitolak() {
+export default function LamaranDiterima() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [applications, setApplications] = useState([])
   const [savedJobs, setSavedJobs] = useState([])
   const [loading, setLoading] = useState(true)
-  const [detailLoading, setDetailLoading] = useState(false)
   const token = localStorage.getItem('token')
-
-  const [showPreview, setShowPreview] = useState(false)
-  const [selectedAppInfo, setSelectedAppInfo] = useState(null)
-
-  const [modal, setModal] = useState({ show: false, title: '', message: '', type: 'alert', onConfirm: null })
-  const showModal = (title, message, type = 'alert', onConfirm = null) => setModal({ show: true, title, message, type, onConfirm })
-  const closeModal = () => setModal(prev => ({ ...prev, show: false }))
-
   const navigate = useNavigate()
 
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
@@ -76,14 +65,15 @@ export default function LamaranDitolak() {
     fetchData()
   }, [])
 
-  const pendingApps = applications.filter(app => app.status === 'pending')
-  const rejectedApps = applications.filter(app => app.status === 'rejected')
+  // Filter data dengan status "accepted" (dianggap undangan wawancara)
+  const hiredApps = applications.filter(app => app.status === 'hired')
 
   const totalApps = applications.length + savedJobs.length
-  const pendingCount = pendingApps.length
+  const pendingCount = applications.filter(a => a.status === 'pending').length
   const reviewedCount = applications.filter(a => a.status === 'reviewed').length
-  const acceptedCount = applications.filter(a => a.status === 'accepted').length
-  const rejectedCount = rejectedApps.length
+  const acceptedCount = hiredApps.length
+  const rejectedCount = applications.filter(a => a.status === 'rejected').length
+  const hiredCount = applications.filter(a => a.status === 'hired').length
   const savedCount = savedJobs.length
 
   const TABS = [
@@ -95,39 +85,6 @@ export default function LamaranDitolak() {
     { id: 'ditolak', label: 'Ditolak', count: rejectedCount, to: '/lamaran-ditolak', countRed: true },
     { id: 'diterima', label: 'Diterima', count: hiredCount, to: '/lamaran-diterima', countGreen: true },
   ]
-
-  const handleTarikLamaran = (appId) => {
-    showModal('Konfirmasi Penghapusan', 'Apakah Anda yakin ingin menghapus riwayat lamaran ini?', 'confirm', async () => {
-      try {
-        const res = await fetch(`https://jobportal-api-zebb.onrender.com/api/applications/${appId}`, {
-          method: 'DELETE',
-          headers: { 'Authorization': `Bearer ${token}` }
-        })
-        if (!res.ok) throw new Error('Gagal menghapus lamaran')
-
-        setApplications(prev => prev.filter(app => app.id !== appId))
-        closeModal()
-      } catch (err) {
-        showModal('Kesalahan', err.message, 'alert')
-      }
-    })
-  }
-
-  const handleDetailClick = async (app) => {
-    setDetailLoading(true)
-    try {
-      const res = await fetch('https://jobportal-api-zebb.onrender.com/api/profile', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-      const profileData = await res.json()
-      setSelectedAppInfo({ app, profile: profileData })
-      setShowPreview(true)
-    } catch (err) {
-      showModal('Kesalahan', 'Gagal memuat detail lamaran', 'alert')
-    } finally {
-      setDetailLoading(false)
-    }
-  }
 
   return (
     <div className="ls-root">
@@ -144,10 +101,7 @@ export default function LamaranDitolak() {
           </svg>
         </button>
         <Link to="/dashboard" className="ls-logo">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="2" y="7" width="20" height="14" rx="2" />
-            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
-          </svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" /></svg>
           <span>JobPortal</span>
         </Link>
         <div className="ls-navbar-right">
@@ -227,28 +181,28 @@ export default function LamaranDitolak() {
           <div className="ls-tabs">
             {TABS.map(tab => (
               <Link key={tab.id} to={tab.to}
-                className={`ls-tab ${tab.id === 'ditolak' ? 'ls-tab-aktif' : ''}`}
+                className={`ls-tab ${tab.id === 'diterima' ? 'ls-tab-aktif' : ''}`}
                 style={{ textDecoration: 'none' }}
               >
                 {tab.id === 'semua' ? tab.label : (
-                  <>{tab.label}<span className={`ls-tab-count ${tab.countBlue ? 'ls-tab-count-blue' : ''} ${tab.countRed ? 'ls-tab-count-red' : ''}`}>{tab.count}</span></>
+                  <>{tab.label}<span className={`ls-tab-count ${tab.countBlue ? 'ls-tab-count-blue' : ''}`}>{tab.count}</span></>
                 )}
               </Link>
             ))}
           </div>
 
           <div className="ds-info-bar">
-            <span className="ds-total"><strong>{rejectedCount}</strong> lamaran ditolak</span>
+            <span className="ds-total"><strong>{hiredCount}</strong> lamaran diterima</span>
           </div>
 
           {loading ? (
             <div className="text-center py-10 text-gray-500">Memuat data...</div>
-          ) : rejectedApps.length === 0 ? (
-            <div className="text-center py-10 text-gray-500">Tidak ada lamaran yang ditolak. Tetap semangat!</div>
+          ) : hiredApps.length === 0 ? (
+            <div className="text-center py-10 text-gray-500">Belum ada lamaran yang diterima.</div>
           ) : (
             <div className="lt-list">
-              {rejectedApps.map(app => (
-                <div key={app.id} className="lt-card" style={{ borderLeft: '4px solid #ef4444' }}>
+              {hiredApps.map(app => (
+                <div key={app.id} className="lt-card" style={{ border: '1.5px solid #bfdbfe', background: '#eff6ff' }}>
                   <div className="lt-card-left">
                     {app.job_listing?.company?.logo ? (
                       <img
@@ -272,29 +226,37 @@ export default function LamaranDitolak() {
                         <span className="ls-separator">·</span>
                         <IkonKerja /><span>{app.job_listing?.job_type?.name}</span>
                       </div>
-                      <p className="lt-tanggal">Dilamar pada {new Date(app.created_at).toLocaleDateString('id-ID')}</p>
+                      <p className="lt-tanggal" style={{ color: '#be185d', fontWeight: '500' }}>
+                        Diterima pada: {new Date(app.created_at).toLocaleDateString('id-ID')}, 10:00 WIB
+                      </p>
                     </div>
                   </div>
 
-                  <div className="lt-progress" style={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', background: '#fef2f2', padding: '12px 16px', borderRadius: '8px', minWidth: '200px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#dc2626', fontWeight: '600', fontSize: '13px', marginBottom: '4px' }}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></svg>
-                      Lamaran Ditolak
-                    </div>
-                    {app.rejection_reason && (
-                      <p style={{ margin: 0, fontSize: '12px', color: '#7f1d1d', lineHeight: '1.4' }}>
-                        "{app.rejection_reason}"
-                      </p>
-                    )}
+                  {/* Progress Steps (accepted = step ke-3) */}
+                  <div className="lt-progress">
+                    {stepLabels.map((label, i) => (
+                      <div key={i} className="lt-step-wrap">
+                        <div className={`lt-step-circle ${i <= 3 ? 'lt-step-aktif' : ''}`}>
+                          {i <= 3 ? (
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                          ) : (
+                            <span className="lt-step-num">{i + 1}</span>
+                          )}
+                        </div>
+                        <span className={`lt-step-label ${i <= 3 ? 'lt-label-aktif' : ''}`}>{label}</span>
+                        {i < stepLabels.length - 1 && (
+                          <div className={`lt-step-line ${i < 3 ? 'lt-line-aktif' : ''}`} />
+                        )}
+                      </div>
+                    ))}
                   </div>
 
                   <div className="lt-card-right">
-                    <button className="lt-btn-tarik" onClick={() => handleTarikLamaran(app.id)} style={{ color: '#64748b', borderColor: '#cbd5e1' }}>
-                      Hapus Riwayat
-                    </button>
-                    <button className="ls-link-btn" onClick={() => handleDetailClick(app)} disabled={detailLoading}>
-                      {detailLoading ? 'Memuat...' : 'Lihat Detail'}
-                    </button>
+                    <span className="ls-badge ls-badge-diterima">
+                      <span className="ls-dot" />
+                      Diterima
+                    </span>
+                    <button className="ls-link-btn" style={{ marginTop: 'auto' }}>Lihat Detail</button>
                   </div>
                 </div>
               ))}
@@ -302,17 +264,6 @@ export default function LamaranDitolak() {
           )}
         </main>
       </div>
-
-      <ModalPreviewLamaran
-        show={showPreview}
-        onClose={() => setShowPreview(false)}
-        profile={selectedAppInfo?.profile}
-        jobTitle={selectedAppInfo?.app?.job_listing?.title}
-        readOnly={true}
-        initialExperience={selectedAppInfo?.app?.experience}
-      />
-
-      <ModalAlert {...modal} onClose={closeModal} />
     </div>
   )
 }
