@@ -318,6 +318,7 @@ export default function LamaranDiterima() {
           </div>
         </div>
       )}
+  <ModalAlert {...modal} onClose={closeModal} />
 </div>
   )
 }

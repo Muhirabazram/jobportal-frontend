@@ -17,17 +17,7 @@ export default function ModalPreviewLamaran({ show, onClose, onConfirm, profile,
         </p>
 
         
-        {readOnly && rejectionReason && (
-          <div style={{ background: '#fef2f2', padding: '16px', borderRadius: '8px', border: '1px solid #fca5a5', marginBottom: '20px' }}>
-            <h4 style={{ margin: '0 0 8px 0', fontSize: '15px', color: '#991b1b', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></svg>
-              Alasan Penolakan HRD
-            </h4>
-            <p style={{ fontSize: '14px', margin: 0, color: '#7f1d1d', whiteSpace: 'pre-wrap', lineHeight: '1.5' }}>
-              "{rejectionReason}"
-            </p>
-          </div>
-        )}
+        
 
         <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0', marginBottom: '20px' }}>
           <h4 style={{ margin: '0 0 12px 0', fontSize: '15px', color: '#334155', borderBottom: '1px solid #e2e8f0', paddingBottom: '8px' }}>Informasi Pribadi</h4>
@@ -67,6 +57,18 @@ export default function ModalPreviewLamaran({ show, onClose, onConfirm, profile,
             />
           )}
         </div>
+
+        {readOnly && rejectionReason && (
+          <div style={{ background: '#fef2f2', padding: '16px', borderRadius: '8px', border: '1px solid #fca5a5', marginBottom: '24px' }}>
+            <h4 style={{ margin: '0 0 8px 0', fontSize: '15px', color: '#991b1b', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></svg>
+              Alasan Penolakan HRD
+            </h4>
+            <p style={{ fontSize: '14px', margin: 0, color: '#7f1d1d', whiteSpace: 'pre-wrap', lineHeight: '1.5' }}>
+              "{rejectionReason}"
+            </p>
+          </div>
+        )}
 
         {!readOnly && isAlreadyApplied && (
           <div style={{ background: '#fef2f2', borderLeft: '4px solid #ef4444', padding: '12px 16px', borderRadius: '4px', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
