@@ -311,6 +311,17 @@ export default function LamaranDiterima() {
                   </div>
                 ))}
               </div>
+              {selectedApp.rejection_reason && (
+                <div style={{ background: '#f0fdf4', padding: '16px', borderRadius: '8px', border: '1px solid #bbf7d0', marginBottom: '20px', marginTop: '16px' }}>
+                  <h4 style={{ margin: '0 0 8px 0', fontSize: '15px', color: '#166534', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
+                    Catatan Keputusan HRD
+                  </h4>
+                  <p style={{ fontSize: '14px', margin: 0, color: '#14532d', whiteSpace: 'pre-wrap', lineHeight: '1.5' }}>
+                    "{selectedApp.rejection_reason}"
+                  </p>
+                </div>
+              )}
               <div className="dpl-modal-actions right">
                 <button className="dpl-btn-primary" onClick={() => setShowModal(false)}>Tutup Riwayat</button>
               </div>

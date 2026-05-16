@@ -247,6 +247,7 @@ function Modal({ type, candidate, onClose, onSave }) {
   const [rejectMode, setRejectMode] = useState(false);
   const [rejectReason, setRejectReason] = useState('');
   const [isRejecting, setIsRejecting] = useState(false);
+  const [hrNote, setHrNote] = useState('');
 
   if (!type) return null;
 
@@ -365,21 +366,21 @@ function Modal({ type, candidate, onClose, onSave }) {
             <p className="dpl-modal-text">Tentukan hasil akhir wawancara untuk <strong>{candidate.user?.name}</strong> — posisi <strong>{candidate.job_listing?.title}</strong>.</p>
             <div className="dpl-form-group">
               <label>Catatan HR:</label>
-              <textarea className="dpl-textarea" rows="4" placeholder="Tuliskan catatan evaluasi atau alasan keputusan..." />
+              <textarea className="dpl-textarea" rows="4" placeholder="Tuliskan catatan evaluasi atau alasan keputusan..." value={hrNote} onChange={e => setHrNote(e.target.value)} />
             </div>
             <div className="dpl-modal-actions-split">
               <button className="dpl-btn-reject" onClick={() => {
                 fetch(`https://jobportal-api-zebb.onrender.com/api/applications/${candidate.id}/status`, {
                   method: 'PUT',
                   headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
-                  body: JSON.stringify({ status: 'rejected' })
+                  body: JSON.stringify({ status: 'rejected', rejection_reason: hrNote })
                 }).then(() => { onClose(); if (onSave) onSave(); });
               }}>Tidak Lolos</button>
               <button className="dpl-btn-accept" onClick={() => {
                 fetch(`https://jobportal-api-zebb.onrender.com/api/applications/${candidate.id}/status`, {
                   method: 'PUT',
                   headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
-                  body: JSON.stringify({ status: 'hired' })
+                  body: JSON.stringify({ status: 'hired', rejection_reason: hrNote })
                 }).then(() => { onClose(); if (onSave) onSave(); });
               }}>Terima & Rekrut</button>
             </div>
