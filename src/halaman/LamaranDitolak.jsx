@@ -84,6 +84,7 @@ export default function LamaranDitolak() {
   const reviewedCount = applications.filter(a => a.status === 'reviewed').length
   const acceptedCount = applications.filter(a => a.status === 'accepted').length
   const rejectedCount = rejectedApps.length
+  const hiredCount = applications.filter(a => a.status === 'hired').length
   const savedCount = savedJobs.length
 
   const TABS = [
