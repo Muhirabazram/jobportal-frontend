@@ -30,11 +30,8 @@ export default function BukaLowongan() {
   const [categoryId, setCategoryId] = useState(jobToEdit?.category_id || '')
   const [jobTypeId, setJobTypeId] = useState(jobToEdit?.job_type_id || '')
   const [locationInput, setLocationInput] = useState(jobToEdit?.location || '')
-  const [salaryRange, setSalaryRange] = useState(
-    jobToEdit?.salary_min && jobToEdit?.salary_max
-      ? `${jobToEdit.salary_min} - ${jobToEdit.salary_max}`
-      : ''
-  )
+  const [salaryMin, setSalaryMin] = useState(jobToEdit?.salary_min || '')
+  const [salaryMax, setSalaryMax] = useState(jobToEdit?.salary_max || '')
   const [description, setDescription] = useState(jobToEdit?.description || '')
   const [responsibilities, setResponsibilities] = useState('')
   const [requirements, setRequirements] = useState('')
@@ -87,7 +84,8 @@ export default function BukaLowongan() {
     }
 
     setSaving(true)
-    const { min, max } = parseSalary(salaryRange)
+    const min = salaryMin ? Number(salaryMin) : null
+    const max = salaryMax ? Number(salaryMax) : null
     let finalReq = `Tanggung Jawab:\n${responsibilities}\n\nPersyaratan:\n${requirements}`;
     if (hideSalary) {
       finalReq += '\n\n[HIDE_SALARY]';
@@ -219,18 +217,27 @@ export default function BukaLowongan() {
               </div>
             </div>
 
+            
             <div className="bl-form-group">
               <label className="bl-form-label">RENTANG GAJI (OPSIONAL)</label>
-              <div className="bl-input-wrap">
-                <span className="bl-input-text-icon">Rp</span>
-                <input type="text" className="bl-input with-icon-left" placeholder="10.000.000 - 15.000.000"
-                  value={salaryRange} onChange={e => setSalaryRange(e.target.value)} />
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <div className="bl-input-wrap" style={{ flex: 1 }}>
+                  <span className="bl-input-text-icon">Rp</span>
+                  <input type="number" className="bl-input with-icon-left" placeholder="Min (Misal: 5000000)"
+                    value={salaryMin} onChange={e => setSalaryMin(e.target.value)} />
+                </div>
+                <div className="bl-input-wrap" style={{ flex: 1 }}>
+                  <span className="bl-input-text-icon">Rp</span>
+                  <input type="number" className="bl-input with-icon-left" placeholder="Max (Misal: 10000000)"
+                    value={salaryMax} onChange={e => setSalaryMax(e.target.value)} />
+                </div>
               </div>
               <label style={{ display: 'flex', alignItems: 'center', marginTop: '8px', cursor: 'pointer', fontSize: '14px', color: '#64748b' }}>
                 <input type="checkbox" checked={hideSalary} onChange={e => setHideSalary(e.target.checked)} style={{ marginRight: '8px' }} />
                 Sembunyikan Gaji dari Publik
               </label>
             </div>
+  
           </div>
 
           <div className="bl-form-group" style={{ marginTop: '12px' }}>

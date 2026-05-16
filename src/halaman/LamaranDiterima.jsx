@@ -71,6 +71,22 @@ export default function LamaranDiterima() {
   // Filter data dengan status "accepted" (dianggap undangan wawancara)
   const hiredApps = applications.filter(app => app.status === 'hired')
 
+  
+  const handleTarikLamaran = (appId) => {
+    showModal('Konfirmasi Penghapusan', 'Apakah Anda yakin ingin menghapus catatan lamaran ini? Data juga akan terhapus dari sisi HRD.', 'confirm', async () => {
+      try {
+        const res = await fetch(`https://jobportal-api-zebb.onrender.com/api/applications/${appId}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${token}` }
+        })
+        if (!res.ok) throw new Error('Gagal menghapus riwayat')
+        setApplications(prev => prev.filter(a => a.id !== appId))
+      } catch (err) {
+        showModal('Kesalahan', err.message, 'alert')
+      }
+    }, 'Hapus Data')
+  }
+  
   const totalApps = applications.length + savedJobs.length
   const pendingCount = applications.filter(a => a.status === 'pending').length
   const reviewedCount = applications.filter(a => a.status === 'reviewed').length
@@ -259,6 +275,7 @@ export default function LamaranDiterima() {
                       <span className="ls-dot" />
                       Diterima
                     </span>
+                    <button className="lt-btn-tarik" onClick={() => handleTarikLamaran(app.id)} style={{ color: '#64748b', borderColor: '#cbd5e1', marginRight: '12px' }}>Hapus Catatan</button>
                     <button className="ls-link-btn" style={{ marginTop: 'auto' }} onClick={() => { setSelectedApp(app); setShowModal(true); }}>Lihat Detail</button>
                   </div>
                 </div>
