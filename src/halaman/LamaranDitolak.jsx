@@ -306,6 +306,7 @@ export default function LamaranDitolak() {
 
       <ModalPreviewLamaran
         show={showPreview}
+        rejectionReason={selectedAppInfo?.rejection_reason}
         onClose={() => setShowPreview(false)}
         profile={selectedAppInfo?.profile}
         jobTitle={selectedAppInfo?.app?.job_listing?.title}

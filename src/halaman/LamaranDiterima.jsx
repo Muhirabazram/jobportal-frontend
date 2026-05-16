@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import './lowongan-saya.css'
 import './disimpan.css'
 import './data-pelamar.css'
+import ModalAlert from '../komponen/ModalAlert'
 
 const IkonDashboard = () => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /></svg>)
 const IkonBriefcase = () => (<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" /></svg>)
@@ -16,6 +17,11 @@ export default function LamaranDiterima() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [applications, setApplications] = useState([])
   const [showModal, setShowModal] = useState(false)
+
+  const [modal, setModal] = useState({ show: false, title: '', message: '', type: 'alert', onConfirm: null, confirmText: '' })
+  const showModalAlert = (title, message, type = 'alert', onConfirm = null, confirmText = '') => setModal({ show: true, title, message, type, onConfirm, confirmText })
+  const closeModal = () => setModal(prev => ({ ...prev, show: false }))
+  
   const [selectedApp, setSelectedApp] = useState(null)
   const [savedJobs, setSavedJobs] = useState([])
   const [loading, setLoading] = useState(true)
@@ -73,7 +79,7 @@ export default function LamaranDiterima() {
 
   
   const handleTarikLamaran = (appId) => {
-    showModal('Konfirmasi Penghapusan', 'Apakah Anda yakin ingin menghapus catatan lamaran ini? Data juga akan terhapus dari sisi HRD.', 'confirm', async () => {
+    showModalAlert('Konfirmasi Penghapusan', 'Apakah Anda yakin ingin menghapus catatan lamaran ini? Data juga akan terhapus dari sisi HRD.', 'confirm', async () => {
       try {
         const res = await fetch(`https://jobportal-api-zebb.onrender.com/api/applications/${appId}`, {
           method: 'DELETE',
@@ -82,7 +88,7 @@ export default function LamaranDiterima() {
         if (!res.ok) throw new Error('Gagal menghapus riwayat')
         setApplications(prev => prev.filter(a => a.id !== appId))
       } catch (err) {
-        showModal('Kesalahan', err.message, 'alert')
+        showModalAlert('Kesalahan', err.message, 'alert')
       }
     }, 'Hapus Data')
   }
@@ -275,7 +281,7 @@ export default function LamaranDiterima() {
                       <span className="ls-dot" />
                       Diterima
                     </span>
-                    <button className="lt-btn-tarik" onClick={() => handleTarikLamaran(app.id)} style={{ color: '#64748b', borderColor: '#cbd5e1', marginRight: '12px' }}>Hapus Catatan</button>
+                    <button className="lt-btn-tarik" onClick={() => handleTarikLamaran(app.id)} style={{ color: '#64748b', borderColor: '#cbd5e1', marginRight: '12px' }}>Hapus Data</button>
                     <button className="ls-link-btn" style={{ marginTop: 'auto' }} onClick={() => { setSelectedApp(app); setShowModal(true); }}>Lihat Detail</button>
                   </div>
                 </div>
