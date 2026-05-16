@@ -364,6 +364,10 @@ function Modal({ type, candidate, onClose, onSave }) {
           <div className="dpl-modal-content">
             <h3 className="dpl-modal-title">Keputusan Seleksi</h3>
             <p className="dpl-modal-text">Tentukan hasil akhir wawancara untuk <strong>{candidate.user?.name}</strong> — posisi <strong>{candidate.job_listing?.title}</strong>.</p>
+            <div className="dpl-form-group">
+              <label>Catatan HR:</label>
+              <textarea className="dpl-textarea" rows="4" placeholder="Tuliskan catatan evaluasi atau alasan keputusan..." />
+            </div>
             <div className="dpl-modal-actions-split">
               <button className="dpl-btn-reject" onClick={() => {
                 fetch(`https://jobportal-api-zebb.onrender.com/api/applications/${candidate.id}/status`, {
