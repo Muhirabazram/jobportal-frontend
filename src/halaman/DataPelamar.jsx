@@ -159,7 +159,6 @@ const IkonAssessment = () => (
 const TAHAPAN = [
   { id: 'interview-hrd', label: 'Interview HRD', deskripsi: 'Jadwalkan sesi interview langsung dengan tim HRD', ikon: IkonWawancaraHR, warna: '#2563eb', bg: '#eff6ff' },
   { id: 'interview-user', label: 'Interview User', deskripsi: 'Interview teknis dengan hiring manager atau tim terkait', ikon: IkonWawancaraUser, warna: '#7c3aed', bg: '#f5f3ff' },
-  { id: 'psikotes', label: 'Tes & Psikotes', deskripsi: 'Kirim link tes kemampuan atau psikotes online kepada kandidat', ikon: IkonAssessment, warna: '#0891b2', bg: '#ecfeff' },
 ];
 
 /* ── Proses Modal ── */
